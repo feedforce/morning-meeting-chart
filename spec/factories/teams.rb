@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :team do
+    sequence(:name) { |i| "name#{i}" }
+    goal  { rand(15) + 10 }
   end
 end

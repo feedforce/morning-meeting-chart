@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :topic do
+    progress
+    sequence(:content) { |i| "トピックの内容#{i}" }
   end
 end
