@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160704114716) do
   create_table "progresses", force: :cascade do |t|
     t.integer  "amount"
     t.date     "start_date"
+    t.integer  "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
