@@ -1,4 +1,4 @@
 class Topic < ApplicationRecord
   belongs_to :progress
-  validates :content, present: true
+  validates :content, presence: true
 end
