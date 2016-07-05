@@ -35,6 +35,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
 
   gem 'mime-types-data'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -59,7 +60,6 @@ group :development do
   gem 'rspec-mocks'
   gem 'rspec-support'
 
-  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
