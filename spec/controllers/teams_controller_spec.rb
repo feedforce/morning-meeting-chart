@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe TeamsController, type: :controller do
+RSpec.xdescribe TeamsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
