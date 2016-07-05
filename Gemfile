@@ -52,6 +52,12 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  gem 'rspec-rails'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-mocks'
+  gem 'rspec-support'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
