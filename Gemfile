@@ -58,6 +58,8 @@ group :development do
   gem 'rspec-expectations'
   gem 'rspec-mocks'
   gem 'rspec-support'
+
+  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
