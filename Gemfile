@@ -36,6 +36,7 @@ group :development, :test do
 
   gem 'mime-types-data'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 2.6.0'
 end
 
 group :development do
