@@ -56,3 +56,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryGirl::Syntax::Methods
 end
+
+# spec/support 以下の .rb を全て require する
+Dir[Rails.root.join('spec/support/*.rb')].each { |f| require f }
