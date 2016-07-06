@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705114625) do
+ActiveRecord::Schema.define(version: 20160706014044) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160705114625) do
     t.integer  "goal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.integer  "progress_id"
+    t.string   "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["progress_id"], name: "index_topics_on_progress_id"
   end
 
 end
