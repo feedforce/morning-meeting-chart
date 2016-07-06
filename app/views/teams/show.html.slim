@@ -1,13 +1,12 @@
-p#notice
-  = notice
 p
-  strong
-    | Name:
-  = @team.name
+  h1
+    = "チーム：#{@team.name}"
 p
-  strong
-    | Goal:
-  = @team.goal
-= link_to 'Edit', edit_team_path(@team)
-|  | 
-= link_to 'Back', teams_path
+  h2
+    | TODO: bootstrap入れてレイアウトを整える
+.container
+  = link_to 'Prev', team_path(@team.id - 1)
+  = ' | '
+  = link_to 'Next', team_path(@team.id + 1)
+  = ' | '
+  = link_to 'Home', teams_path
