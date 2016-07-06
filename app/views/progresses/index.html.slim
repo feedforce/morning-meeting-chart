@@ -1,0 +1,20 @@
+p#notice
+  = notice
+h1
+  | Progressess
+table
+  thead
+    tr
+      th
+        | StartDate
+      th
+        | Amount
+      th[colspan="3"]
+  tbody
+    - @progresses.each do |progress|
+      tr
+        td
+          = progress.start_date
+        td
+          = progress.amount
+br
