@@ -1,0 +1,3 @@
+database:
+  override:
+    - bundle exec rails db:create db:schema:load --trace
