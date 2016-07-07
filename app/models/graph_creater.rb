@@ -32,6 +32,11 @@ class GraphCreater
   end
 
   def categories
-    ["United States", "Japan", "China", "Germany", "Franceoehgohgoe"]
+    categories = @team.progresses.map do |progress|
+      list ||= []
+      list << category_day(progress) if progress.start_date.month == this_month
+    end
+    categories.flatten!
+  end
   end
 end
