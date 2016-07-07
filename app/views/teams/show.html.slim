@@ -8,7 +8,9 @@
       h2 lazy_high_chartsをこの辺に入れる予定 
     .col-xs-5
       h2 Topics
-      h3 ここにトピックを突っ込む
+      - @team.progresses.last.topics.each do |topic|
+        h3
+          = topic.content
 
 footer.footer
   .container
