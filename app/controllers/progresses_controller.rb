@@ -9,6 +9,8 @@ class ProgressesController < ApplicationController
       Topic.create!(topic_params)
     end
     redirect_to team_progresses_path(params[:team_id])
+  rescue => e
+    redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
   private
