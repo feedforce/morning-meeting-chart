@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :topic do
     progress nil
-    content "MyString"
+    sequence(:content) { |i| "トピック内容#{i}" }
   end
 end
