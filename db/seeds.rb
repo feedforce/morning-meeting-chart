@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+team = FactoryGirl.create(:team)
+4.times do
+  pr = FactoryGirl.create(:progress, team: team)
+  FactoryGirl.create(:topic, progress: pr)
+end
