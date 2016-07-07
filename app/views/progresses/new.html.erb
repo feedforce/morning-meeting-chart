@@ -8,9 +8,12 @@
     <%= flash[:alert] %>
   </div>
 <% end %>
+
 <h1> 進捗どうですか？ </h1>
 <%= form_tag("/teams/#{params[:team_id]}/progresses", method: 'post') do %>
     <%= label_tag '成果' %> <%= text_field_tag 'progress[amount]' %>
     <%= label_tag 'トピック' %> <%= text_field_tag 'topic[content]' %>
     <%= submit_tag "作成" %>
 <% end %>
+
+<%= link_to '戻る', team_progresses_path(params[:team_id]) %>
