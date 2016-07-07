@@ -18,12 +18,26 @@ class GraphCreater
         }
       )
       f.yAxis [
-        {title: {text: "GDP in Billions", margin: 70} },
-        {title: {text: "Population in Millions"}, opposite: true},
+        {
+          title: {
+            text: '獲得件数', margin: 70
+          },
+          plotLines: [
+            {
+              value: @team.goal,
+              color: '#FF0000',
+              width: 2,
+              label: {
+                text: "目標 = #{@team.goal}",
+                align: 'right',
+                x: 70,
+                y: 5
+              }
+            }
+          ]
+        }
       ]
-
-      f.legend(align: 'right', verticalAlign: 'top', y: 75, x: -50, layout: 'vertical')
-      f.chart({defaultSeriesType: "column"})
+      f.legend(align: 'right', verticalAlign: 'middle', y: 75, x: -50, layout: 'vertical')
     end
   end
 
