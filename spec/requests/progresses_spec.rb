@@ -36,7 +36,7 @@ RSpec.describe "Progresses", type: :request do
     describe '正常系' do
       it_behaves_like 'HTTP 302 Found'
       it_behaves_like 'redirect' do
-        let(:redirect_path) { root_path }
+        let(:redirect_path) { team_progresses_path(team) }
       end
 
       it 'Progress が 1 つ作られる' do

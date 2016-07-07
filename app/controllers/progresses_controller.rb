@@ -8,7 +8,7 @@ class ProgressesController < ApplicationController
       @progress = Progress.create!(progress_params)
       Topic.create!(topic_params)
     end
-    redirect_to root_path
+    redirect_to team_progresses_path(params[:team_id])
   end
 
   private
