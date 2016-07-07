@@ -5,6 +5,8 @@ class GraphCreater
   end
 
   def create
+    return nil if @team.progresses.empty?
+
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)

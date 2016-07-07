@@ -2,8 +2,9 @@ class ProgressesController < ApplicationController
   before_action :set_team, only: [:index]
 
   def index
-    @progresses = Progress.where(team: @team)
-    @graph = @team.graph
+    @graph = LazyHighCharts::HighChart.new('graph')
+    @graph = @team.graph if @team.graph
+    @progresses = Progress.where(team_id: @team.id)
   end
 
   def create
