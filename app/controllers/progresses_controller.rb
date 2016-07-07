@@ -1,6 +1,8 @@
 class ProgressesController < ApplicationController
+  before_action :set_team, only: [:index]
+
   def index
-    @progresses = Progress.where(team_id: params[:team_id])
+    @progresses = Progress.where(team: @team)
   end
 
   def create
@@ -14,6 +16,10 @@ class ProgressesController < ApplicationController
   end
 
   private
+
+  def set_team
+    @team = Team.find(params[:team_id])
+  end
 
   def progress_params
     params.require(:progress).permit(:amount).merge(team: Team.find(params[:team_id]))
