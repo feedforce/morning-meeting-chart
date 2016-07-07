@@ -3,6 +3,7 @@ class ProgressesController < ApplicationController
 
   def index
     @progresses = Progress.where(team: @team)
+    @graph = @team.graph
   end
 
   def create
