@@ -73,5 +73,4 @@ class GraphCreater
       list << sum
     end
   end
-  end
 end
