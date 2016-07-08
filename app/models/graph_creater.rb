@@ -14,12 +14,12 @@ class GraphCreater
         type: 'column',
         stacking: 'normal',
         yAxis: 0,
-        data: series_stacked_data
+        data: series_stacked_data_for_column
       )
       f.series(
         type: 'line',
         yAxis: 0,
-        data: series_stacked_data,
+        data: series_stacked_data_for_line,
         dataLabels: {
           enabled: true
         }
@@ -78,11 +78,27 @@ class GraphCreater
     list
   end
 
-  def series_stacked_data
+  def series_stacked_data_for_line
     sum = 0
     list = []
     series_data.each do |s|
       list.push(sum += s)
+    end
+    list
+  end
+
+  def series_stacked_data_for_column
+    list = []
+    series_data.each_with_index do |data, i|
+      tmp = []
+      (i+1).times { tmp.push(data) }
+      (series_data.size - 1 - i).times { tmp.unshift(0) }
+      list.push(
+        {
+          name: "Week #{series_data.size - i}",
+          data: tmp
+        }
+      )
     end
     list
   end
