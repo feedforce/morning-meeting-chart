@@ -10,12 +10,17 @@ class GraphCreater
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)
-      f.series(type: 'column', stacking: 'normal', yAxis: 0, data: series_stacked_data)
+      f.series(
+        type: 'column',
+        stacking: 'normal',
+        yAxis: 0,
+        data: series_stacked_data
+      )
       f.series(
         type: 'line',
         yAxis: 0,
         data: series_stacked_data,
-        dataLabels:{
+        dataLabels: {
           enabled: true
         }
       )
@@ -65,12 +70,20 @@ class GraphCreater
     "#{progress.start_date.day}〜#{(progress.start_date.day + 5)}日"
   end
 
+  def series_data
+    list = []
+    @team.progresses.each do |progress|
+      list.push(progress.amount) if progress.start_date.month == this_month
+    end
+    list
+  end
+
   def series_stacked_data
     sum = 0
-    series = @team.progresses.map do |progress|
-      list ||= []
-      sum += progress.amount if progress.start_date.month == this_month
-      list << sum
+    list = []
+    series_data.each do |s|
+      list.push(sum += s)
     end
+    list
   end
 end
