@@ -50,7 +50,7 @@ class GraphCreater
   end
 
   def title
-    this_month.to_s + '月度' + @team.name
+    "#{this_month}月度 #{@team.name}"
   end
 
   def categories
@@ -62,7 +62,7 @@ class GraphCreater
   end
 
   def category_day(progress)
-    progress.start_date.day.to_s + '〜'+(progress.start_date.day + 5).to_s + '日'
+    "#{progress.start_date.day}〜#{(progress.start_date.day + 5)}日"
   end
 
   def series_stacked_data
