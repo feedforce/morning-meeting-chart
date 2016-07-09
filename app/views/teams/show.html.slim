@@ -5,7 +5,7 @@
 .container
   .row
     .col-xs-7 
-      h2 lazy_high_chartsをこの辺に入れる予定 
+      = high_chart("chart-#{@team.id}", @team.graph);
     .col-xs-5
       h2 Topics
       - @team.progresses.last.topics.each do |topic|
@@ -22,7 +22,7 @@ footer.footer
         p.footer-text
           - if @team.id > 1
             = link_to '<<', team_path(@team.id - 1)
-      .col-xs-1.col-xs-offset-4
+      .col-xs-1.col-xs-offset-3
         p.footer-text
           - if Team.exists?(id: @team.id + 1)
             = link_to '>>', team_path(@team.id + 1)
