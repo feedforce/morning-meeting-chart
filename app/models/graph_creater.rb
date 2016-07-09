@@ -6,18 +6,18 @@ class GraphCreater
 
   def create
     return nil if @team.progresses.empty?
-
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)
-      f.series(
-        type: 'column',
-        stacking: 'normal',
-        yAxis: 0,
-        data: series_stacked_data_for_column
-      )
+      series_data.reverse.each_with_index do |data, i|
+        tmp = []
+        (i+1).times { tmp.push(data) }
+        (series_data.size - 1 - i).times { tmp.unshift(0) }
+        f.series(type: 'column', name: "Week #{series_data.size - i}", stacking: 'normal', data: tmp)
+      end
       f.series(
         type: 'line',
+        name: 'sum',
         yAxis: 0,
         data: series_stacked_data_for_line,
         dataLabels: {
@@ -83,22 +83,6 @@ class GraphCreater
     list = []
     series_data.each do |s|
       list.push(sum += s)
-    end
-    list
-  end
-
-  def series_stacked_data_for_column
-    list = []
-    series_data.each_with_index do |data, i|
-      tmp = []
-      (i+1).times { tmp.push(data) }
-      (series_data.size - 1 - i).times { tmp.unshift(0) }
-      list.push(
-        {
-          name: "Week #{series_data.size - i}",
-          data: tmp
-        }
-      )
     end
     list
   end
