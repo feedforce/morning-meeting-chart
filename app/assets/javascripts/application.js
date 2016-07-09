@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap.min
 //= require_tree .
-//= require highcharts/highcharts
-//= require highcharts/highcharts-more
 //= require highcharts/highstock
+//= require highcharts/highcharts-more
 //= require highcharts/modules/exporting
