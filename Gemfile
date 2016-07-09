@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+## Graph
+gem 'lazy_high_charts'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -55,6 +57,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', '~> 2.6.0'
   gem 'rails-controller-testing'
+
+  gem 'hirb'
+  gem 'hirb-unicode'
 end
 
 group :development do

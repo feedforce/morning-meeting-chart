@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :topic do
-    progress nil
+    progress
     sequence(:content) { |i| "トピック内容#{i}" }
   end
 end
