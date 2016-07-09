@@ -17,9 +17,10 @@ class GraphCreater
           data: create_stack_data(data, i)
         )
       end
+
       f.series(
         type: 'line',
-        name: 'sum',
+        name: '合計値',
         yAxis: 0,
         data: series_stacked_data_for_line,
         dataLabels: {
