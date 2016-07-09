@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.2'
 # Use Slim template engine
 gem 'slim-rails'
 
+## Graph
+gem 'lazy_high_charts'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -8,6 +8,7 @@ class Progress < ApplicationRecord
   validates :amount, presence: true
 
   private
+
   def set_default
     self.start_date ||= last_monday
   end
