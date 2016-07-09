@@ -10,10 +10,12 @@ class GraphCreater
       f.title(text: title)
       f.xAxis(categories: categories)
       series_data.reverse.each_with_index do |data, i|
-        tmp = []
-        (i+1).times { tmp.push(data) }
-        (series_data.size - 1 - i).times { tmp.unshift(0) }
-        f.series(type: 'column', name: "Week #{series_data.size - i}", stacking: 'normal', data: tmp)
+        f.series(
+          type: 'column',
+          name: "Week #{series_data.size - i}",
+          stacking: 'normal',
+          data: create_stack_data(data, i)
+        )
       end
       f.series(
         type: 'line',
@@ -85,5 +87,12 @@ class GraphCreater
       list.push(sum += s)
     end
     list
+  end
+
+  def create_stack_data (data,i)
+    tmp = []
+    (i+1).times { tmp.push(data) }
+    (series_data.size - 1 - i).times { tmp.unshift(0) }
+    tmp
   end
 end
