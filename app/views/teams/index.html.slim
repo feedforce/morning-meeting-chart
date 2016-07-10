@@ -22,6 +22,8 @@ table
         td
           = link_to 'Edit', edit_team_path(team)
         td
+          = link_to 'Progresses', team_progresses_path(team)
+        td
           = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }
 br
 = link_to 'New Team', new_team_path
