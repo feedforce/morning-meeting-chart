@@ -7,6 +7,10 @@ class ProgressesController < ApplicationController
     @progresses = Progress.where(team_id: @team.id)
   end
 
+  def new
+    @start_date = last_monday
+  end
+
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
@@ -24,10 +28,15 @@ class ProgressesController < ApplicationController
   end
 
   def progress_params
-    params.require(:progress).permit(:amount).merge(team: Team.find(params[:team_id]))
+    params.require(:progress).permit(:amount, :start_date).merge(team: Team.find(params[:team_id]))
   end
 
   def topic_params
     params.require(:topic).permit(:content).merge(progress: @progress)
+  end
+  
+  def last_monday
+    this_day = Date.today
+    (this_day - (this_day.wday - 1)) - 7
   end
 end
