@@ -63,15 +63,15 @@ class GraphCreater
   end
 
   def categories
+    list ||= []
     categories = @team.progresses.map do |progress|
-      list ||= []
       list << category_day(progress) if progress.start_date.month == this_month
     end
-    categories.flatten!
+    list
   end
 
   def category_day(progress)
-    "#{progress.start_date.day}〜#{(progress.start_date.day + 5)}日"
+    "#{progress.start_date.day}〜#{(progress.start_date + 5).day}日"
   end
 
   def series_data

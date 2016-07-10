@@ -2,7 +2,7 @@ class Progress < ApplicationRecord
   after_initialize :set_default, if: :new_record?
 
   belongs_to :team
-  has_many :topic
+  has_many :topics
 
   validates :start_date, presence: true
   validates :amount, presence: true

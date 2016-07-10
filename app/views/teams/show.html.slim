@@ -1,13 +1,58 @@
-p#notice
-  = notice
-p
-  strong
-    | Name:
-  = @team.name
-p
-  strong
-    | Goal:
-  = @team.goal
-= link_to 'Edit', edit_team_path(@team)
-|  | 
-= link_to 'Back', teams_path
+.container
+  p
+    h1
+      = "チーム：#{@team.name}"
+.container
+  .row
+    .col-xs-7 
+      = high_chart("chart-#{@team.id}", @team.graph);
+    .col-xs-5
+      h2 Topics
+      - @team.progresses.last.topics.each do |topic|
+        h3
+          = topic.content
+
+footer.footer
+  .container
+    .row
+      .col-xs-1
+        p.footer-text
+          = link_to 'home', teams_path 
+      .col-xs-1.col-xs-offset-2
+        p.footer-text
+          - if @team.id > 1
+            = link_to '<<', team_path(@team.id - 1)
+      .col-xs-1.col-xs-offset-3
+        p.footer-text
+          - if Team.exists?(id: @team.id + 1)
+            = link_to '>>', team_path(@team.id + 1)
+
+style type='text/css'
+  | html {
+      position: relative;
+      min-height: 100%;
+    }
+    body {
+      margin-bottom: 60px;
+      margin-right: 0px;
+      margin-left: 0px;
+      margin-top: 0px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 60px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 1080px;
+      width: auto;
+      padding: 0 15px;
+    }
+    .container .footer-text {
+      font-size: 20px;
+      font-weight: bolder;
+      margin: 20px 0;
+    }
