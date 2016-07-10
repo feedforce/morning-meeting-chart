@@ -1,7 +1,7 @@
 p#notice
   = notice
 h1
-  | Progressess
+  | Progresses
 table
   thead
     tr
@@ -18,3 +18,5 @@ table
         td
           = progress.amount
 br
+= link_to '新規作成', new_team_progress_path(params[:team_id])
+= high_chart("some_id", @graph)
