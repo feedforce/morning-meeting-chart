@@ -5,12 +5,14 @@
 .container
   .row
     .col-xs-7 
-      = high_chart("chart-#{@team.id}", @team.graph);
+      - if @team.progresses.present?
+        = high_chart("chart-#{@team.id}", @team.graph)
     .col-xs-5
       h2 Topics
-      - @team.progresses.last.topics.each do |topic|
-        h3
-          = topic.content
+      - if @team.progresses.present?
+        - @team.progresses.last.topics.each do |topic|
+          h3
+            = topic.content
 
 footer.footer
   .container
@@ -20,7 +22,7 @@ footer.footer
           = link_to 'home', teams_path 
       .col-xs-1.col-xs-offset-2
         p.footer-text
-          - if @team.id > 1
+          - if Team.exists?(id: @team.id - 1)
             = link_to '<<', team_path(@team.id - 1)
       .col-xs-1.col-xs-offset-3
         p.footer-text
