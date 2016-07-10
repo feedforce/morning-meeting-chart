@@ -1,5 +1,6 @@
 class ProgressesController < ApplicationController
-  before_action :set_team, only: [:index]
+  before_action :set_team, only: [:index] 
+  before_action :set_progress, only: [:destroy]
 
   def index
     @graph = LazyHighCharts::HighChart.new('graph')
@@ -21,10 +22,21 @@ class ProgressesController < ApplicationController
     redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
+  def destroy
+    @progress.destroy
+    respond_to do |format|
+      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: 'Progress was successfully destroyed.' }
+    end
+  end
+
   private
 
   def set_team
     @team = Team.find(params[:team_id])
+  end
+
+  def set_progress
+    @progress = Progress.find(params[:id])
   end
 
   def progress_params
