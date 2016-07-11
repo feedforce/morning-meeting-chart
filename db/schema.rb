@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706014044) do
+ActiveRecord::Schema.define(version: 20160711153507) do
+
+  create_table "graphs", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "yaxis"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_graphs_on_team_id"
+  end
 
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
