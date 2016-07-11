@@ -20,6 +20,9 @@ table
         td
           = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }
         
-br
-= link_to '新規作成', new_team_progress_path(params[:team_id])
-= high_chart("some_id", @graph)
+p
+  = link_to '新規作成', new_team_progress_path(params[:team_id])
+p
+  = link_to 'チーム一覧へ', teams_path
+.container
+  = high_chart("some_id", @graph)
