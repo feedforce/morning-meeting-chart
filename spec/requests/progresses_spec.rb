@@ -25,11 +25,12 @@ RSpec.describe "Progresses", type: :request do
           goal: 10
         },
         progress: {
-          amount: 3
+          amount: 3,
+          start_date: Date.current
         },
         topic: {
           content: 'test content'
-        }
+        },
       }
     end
 
@@ -40,6 +41,7 @@ RSpec.describe "Progresses", type: :request do
       end
 
       it 'Progress が 1 つ作られる' do
+        binding.pry
         expect { subject }.to change(Progress, :count).by(1)
       end
 
