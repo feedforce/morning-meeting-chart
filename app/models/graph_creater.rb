@@ -1,5 +1,4 @@
 class GraphCreater
-
   def initialize(team)
     @team = team
   end
@@ -12,7 +11,7 @@ class GraphCreater
       series_data.reverse.each_with_index do |data, i|
         f.series(
           type: 'column',
-          name: "Week #{series_data.size - i}",
+          name: categories[i],
           stacking: 'normal',
           data: create_stack_data(data, i)
         )
@@ -64,7 +63,7 @@ class GraphCreater
 
   def categories
     list ||= []
-    categories = @team.progresses.map do |progress|
+    @team.progresses.map do |progress|
       list << category_day(progress) if progress.start_date.month == this_month
     end
     list
