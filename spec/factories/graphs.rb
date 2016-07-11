@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :graph do
-    team nil
-    yaxis "MyString"
+    team
+    yaxis '受注案件'
   end
 end
