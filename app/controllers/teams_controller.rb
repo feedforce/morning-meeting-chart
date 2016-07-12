@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'チーム情報の更新に成功しました。' }
+        format.html { redirect_to teams_path, notice: 'チーム情報の更新に成功しました。' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
