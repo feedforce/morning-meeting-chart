@@ -1,6 +1,7 @@
-.container
-  p#notice
-    = notice
+- if notice.present?
+  .container
+    .alert.alert-info
+      = notice
 .container
   h1
     | チーム一覧
