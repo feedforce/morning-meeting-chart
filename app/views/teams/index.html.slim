@@ -6,28 +6,31 @@
   h1
     | チーム一覧
 .container
-  table.table.table-striped
+  table.table.table-hover
     thead
       tr
-        th
+        th.centering
           | チーム名
-        th
+        th.goal
           | 月目標
         th[colspan="3"]
     tbody
       - @teams.each do |team|
         tr
-          td
+          td.centering
             = team.name
-          td
-            = team.goal
-          td
-            = link_to 'プレビュー', team
-          td
-            = link_to 'チーム情報編集', edit_team_path(team)
-          td
+          td.goal
+            - if team.goal < 1000
+              = "#{team.goal} 件"
+            - else
+              = "#{number_to_currency(team.goal, unit: '', precision: 0)} 円"
+          td.centering
             = link_to '進捗管理', team_progresses_path(team)
-          td
-            = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+          td.centering
+            = link_to 'チーム情報編集', edit_team_path(team)
+          td.centering
+            = link_to 'プレビュー', team
+          / td.centering
+          /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
 .container
   = link_to 'Create New Team', new_team_path
