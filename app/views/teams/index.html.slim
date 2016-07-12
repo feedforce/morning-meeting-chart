@@ -25,9 +25,9 @@
             - else
               = "#{number_to_currency(team.goal, unit: '', precision: 0)} 円"
           td.centering
-            = link_to '進捗管理', team_progresses_path(team)
+            = link_to '実績管理', team_progresses_path(team)
           td.centering
-            = link_to 'チーム情報編集', edit_team_path(team)
+            = link_to '月間目標編集', edit_team_path(team)
           td.centering
             = link_to 'プレビュー', team
           / td.centering
