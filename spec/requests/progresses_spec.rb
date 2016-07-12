@@ -41,7 +41,6 @@ RSpec.describe "Progresses", type: :request do
       end
 
       it 'Progress が 1 つ作られる' do
-        binding.pry
         expect { subject }.to change(Progress, :count).by(1)
       end
 
