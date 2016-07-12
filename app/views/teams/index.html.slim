@@ -18,12 +18,12 @@ table
         td
           = team.goal
         td
-          = link_to 'Show', team
+          = link_to 'プレビュー', team
         td
-          = link_to 'Edit', edit_team_path(team)
+          = link_to 'チーム情報編集', edit_team_path(team)
         td
-          = link_to 'Progresses', team_progresses_path(team)
+          = link_to '進捗管理', team_progresses_path(team)
         td
-          = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'チーム削除', team, method: :delete, data: { confirm: 'Are you sure?' }
 br
 = link_to 'New Team', new_team_path
