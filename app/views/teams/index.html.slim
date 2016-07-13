@@ -1,7 +1,10 @@
-- if notice.present?
-  .container
-    .alert.alert-info
-      = notice
+- if flash[:notice]
+  .container.alert.alert-success
+    = flash[:notice]
+- if flash[:alert]
+  .container.alert.alert-danger
+    = flash[:alert]
+
 .container
   h1 チーム一覧
 .container
