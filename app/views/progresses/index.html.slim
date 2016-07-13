@@ -17,7 +17,7 @@ p#notice
       - @progresses.each do |progress|
         tr
           td
-            = progress.start_date
+            = "#{progress.start_date} ～ #{progress.start_date + 4}"
           td
             = progress.amount
           td

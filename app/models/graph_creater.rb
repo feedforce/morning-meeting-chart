@@ -70,7 +70,7 @@ class GraphCreater
   end
 
   def category_day(progress)
-    "#{progress.start_date.day}〜#{(progress.start_date + 5).day}日"
+    "#{progress.start_date.day}〜#{(progress.start_date + 4).day}日"
   end
 
   def series_data
