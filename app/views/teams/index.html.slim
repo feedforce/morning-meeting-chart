@@ -3,8 +3,7 @@
     .alert.alert-info
       = notice
 .container
-  h1
-    | チーム一覧
+  h1 チーム一覧
 .container
   table.table.table-hover
     thead
@@ -20,10 +19,7 @@
           td.centering
             = team.name
           td.goal
-            - if team.goal < 1000
-              = "#{team.goal} 件"
-            - else
-              = "#{number_to_currency(team.goal, unit: '', precision: 0)} 円"
+            = team.goal_formatted
           td.centering
             = link_to '実績管理', team_progresses_path(team)
           td.centering

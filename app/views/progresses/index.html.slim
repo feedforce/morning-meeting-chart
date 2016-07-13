@@ -2,7 +2,10 @@ p#notice
   = notice
 
 .container
-  h1 実績管理 
+  h1 実績管理
+  h3
+    = "#{@team.name} チーム - "
+    = "月間目標: #{@team.goal_formatted}"
 
 .container.container-table
   table.table.table-hover
@@ -12,14 +15,14 @@ p#notice
           | 期間 
         th
           | 実績
-        th[colspan="3"]
+        th[colspan="2"]
     tbody
       - @progresses.each do |progress|
         tr
           td
             = "#{progress.start_date} ～ #{progress.start_date + 4}"
           td
-            = progress.amount
+            = progress.amount_formatted
           td
             | 編集
           td
