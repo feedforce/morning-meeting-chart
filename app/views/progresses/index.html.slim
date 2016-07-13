@@ -28,7 +28,9 @@ p#notice
 .container
   = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-default'
 
-.container
+hr
+
+.container.container-graph
   h3 グラフプレビュー
   = high_chart("some_id", @graph)
 
