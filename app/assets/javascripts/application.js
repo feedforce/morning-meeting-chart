@@ -13,7 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .
 //= require highcharts/highstock
 //= require highcharts/highcharts-more
 //= require highcharts/modules/exporting
+
+$(function() {
+  $('#datetimepicker4').datetimepicker(
+    {
+      format: 'YYYY-MM-DD',
+    }
+  );
+});

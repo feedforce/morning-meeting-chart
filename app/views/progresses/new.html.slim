@@ -10,9 +10,11 @@
 
 .container.container-form
   = form_tag("/teams/#{params[:team_id]}/progresses", method: 'post') do
-    .form-group
-      = label_tag '週開始日'
-      = text_field_tag 'progress[start_date]', @start_date, class: 'form-control'
+    .row
+      .col-xs-5
+        .form-group
+          = label_tag '週開始日'
+          = text_field_tag 'progress[start_date]', '',  class: 'form-control', id: 'datetimepicker4'
     
     .form-group
       = label_tag '成果'
