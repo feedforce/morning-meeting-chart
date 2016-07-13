@@ -39,15 +39,15 @@ class GraphCreater
               width: 2,
               label: {
                 text: "目標 = #{@team.goal}",
-                align: 'right',
-                x: 70,
-                y: 5
+                align: 'left',
+                x: 0,
+                y: -10
               }
             }
           ]
         }
       ]
-      f.legend(align: 'right', verticalAlign: 'middle', y: 75, x: -50, layout: 'vertical')
+      f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
     end
   end
 
