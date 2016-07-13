@@ -60,6 +60,10 @@ GEM
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.4.0)
@@ -105,6 +109,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    pg (0.18.4)
     pkg-config (1.1.7)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -123,6 +128,8 @@ GEM
       pry (>= 0.9.11)
     puma (3.4.0)
     rack (2.0.1)
+    rack-ip_address_restriction (0.1.1)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0)
@@ -232,6 +239,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails
   byebug
   coffee-rails (~> 4.2)
+  dotenv-rails
   factory_girl_rails
   hirb
   hirb-unicode
@@ -241,11 +249,13 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mime-types-data
   momentjs-rails
+  pg
   pry-byebug
   pry-doc
   pry-rails
   pry-stack_explorer
   puma (~> 3.0)
+  rack-ip_address_restriction
   rails (~> 5.0.0)
   rails-controller-testing
   rspec-core

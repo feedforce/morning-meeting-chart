@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20160706014044) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
     t.date     "start_date"
     t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_progresses_on_team_id"
+    t.index ["team_id"], name: "index_progresses_on_team_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
@@ -33,7 +36,9 @@ ActiveRecord::Schema.define(version: 20160706014044) do
     t.string   "content"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["progress_id"], name: "index_topics_on_progress_id"
+    t.index ["progress_id"], name: "index_topics_on_progress_id", using: :btree
   end
 
+  add_foreign_key "progresses", "teams"
+  add_foreign_key "topics", "progresses"
 end
