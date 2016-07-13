@@ -1,5 +1,4 @@
 class GraphCreater
-
   def initialize(team)
     @team = team
   end
@@ -12,7 +11,7 @@ class GraphCreater
       series_data.reverse.each_with_index do |data, i|
         f.series(
           type: 'column',
-          name: "Week #{series_data.size - i}",
+          name: categories[i],
           stacking: 'normal',
           data: create_stack_data(data, i)
         )
@@ -40,15 +39,15 @@ class GraphCreater
               width: 2,
               label: {
                 text: "目標 = #{@team.goal}",
-                align: 'right',
-                x: 70,
-                y: 5
+                align: 'left',
+                x: 0,
+                y: -10
               }
             }
           ]
         }
       ]
-      f.legend(align: 'right', verticalAlign: 'middle', y: 75, x: -50, layout: 'vertical')
+      f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
     end
   end
 
@@ -64,7 +63,7 @@ class GraphCreater
 
   def categories
     list ||= []
-    categories = @team.progresses.map do |progress|
+    @team.progresses.map do |progress|
       list << category_day(progress) if progress.start_date.month == this_month
     end
     list
@@ -93,8 +92,8 @@ class GraphCreater
 
   def create_stack_data (data,i)
     tmp = []
+    (series_data.size - 1 - i).times { tmp.push(0) }
     (i+1).times { tmp.push(data) }
-    (series_data.size - 1 - i).times { tmp.unshift(0) }
     tmp
   end
 
