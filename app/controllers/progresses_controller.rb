@@ -5,7 +5,7 @@ class ProgressesController < ApplicationController
   def index
     @graph = LazyHighCharts::HighChart.new('graph')
     @graph = @team.graph if @team.graph
-    @progresses = Progress.where(team_id: @team.id)
+    @progresses = Progress.where(team_id: @team.id).order('start_date DESC')
   end
 
   def new
