@@ -31,5 +31,6 @@
             = link_to 'プレビュー', team
           / td.centering
           /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+
 .container
-  = link_to 'Create New Team', new_team_path
+  = link_to 'チーム新規作成', new_team_path, class: 'btn btn-primary'

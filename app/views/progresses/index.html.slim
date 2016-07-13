@@ -41,6 +41,5 @@ hr
   h3 グラフプレビュー
   = high_chart("some_id", @graph)
 
-.container        
-  p
-    = link_to 'チーム一覧へ', teams_path
+.container         
+  = link_to 'チーム一覧へ', teams_path, class: 'btn btn-default'
