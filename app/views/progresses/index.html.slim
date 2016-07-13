@@ -26,7 +26,7 @@ p#notice
             = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }
 
 .container
-  = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-default'
+  = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-primary'
 
 hr
 
