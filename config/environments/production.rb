@@ -83,4 +83,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.middleware.insert 0, Rack::IpAddressRestriction, '/' => %w(127.0.0.1) + ["#{ENV['ALLOW_IP']}"]
 end
