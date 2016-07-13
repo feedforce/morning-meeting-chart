@@ -1,4 +1,26 @@
-h1
-  | New Team
-= render 'form', team: @team
-= link_to 'Back', teams_path
+.container
+  h1
+    | チームの新規作成
+
+.container.container-form
+  = form_tag("/teams", method: 'post') do
+    .row
+      .col-xs-4
+        .form-group
+          = label_tag 'チーム名'
+          = text_field_tag 'team[name]', nil, class: 'form-control'
+        
+    .row
+      .col-xs-4
+        .form-group
+          = label_tag '当月目標'
+          = text_field_tag 'team[goal]', 0, class: 'form-control'
+        
+    .row
+      .col-xs-4
+        .form-group
+          = submit_tag "作成", class: 'btn btn-primary'
+
+.container
+  p
+    = link_to 'チーム一覧に戻る', teams_path

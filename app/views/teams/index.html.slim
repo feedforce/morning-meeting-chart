@@ -1,29 +1,36 @@
-p#notice
-  = notice
-h1
-  | Teams
-table
-  thead
-    tr
-      th
-        | Name
-      th
-        | Goal
-      th[colspan="3"]
-  tbody
-    - @teams.each do |team|
+- if notice.present?
+  .container
+    .alert.alert-info
+      = notice
+.container
+  h1
+    | チーム一覧
+.container
+  table.table.table-hover
+    thead
       tr
-        td
-          = team.name
-        td
-          = team.goal
-        td
-          = link_to 'Show', team
-        td
-          = link_to 'Edit', edit_team_path(team)
-        td
-          = link_to 'Progresses', team_progresses_path(team)
-        td
-          = link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New Team', new_team_path
+        th.centering
+          | チーム名
+        th.goal
+          | 月間目標
+        th[colspan="3"]
+    tbody
+      - @teams.each do |team|
+        tr
+          td.centering
+            = team.name
+          td.goal
+            - if team.goal < 1000
+              = "#{team.goal} 件"
+            - else
+              = "#{number_to_currency(team.goal, unit: '', precision: 0)} 円"
+          td.centering
+            = link_to '実績管理', team_progresses_path(team)
+          td.centering
+            = link_to '月間目標編集', edit_team_path(team)
+          td.centering
+            = link_to 'プレビュー', team
+          / td.centering
+          /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+.container
+  = link_to 'Create New Team', new_team_path

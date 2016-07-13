@@ -25,11 +25,12 @@ RSpec.describe "Progresses", type: :request do
           goal: 10
         },
         progress: {
-          amount: 3
+          amount: 3,
+          start_date: Date.current
         },
         topic: {
           content: 'test content'
-        }
+        },
       }
     end
 
