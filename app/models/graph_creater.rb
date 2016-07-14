@@ -90,7 +90,7 @@ class GraphCreater
     list
   end
 
-  def create_stack_data (data,i)
+  def create_stack_data(data, i)
     tmp = []
     (series_data.size - 1 - i).times { tmp.push(0) }
     (i+1).times { tmp.push(data) }
