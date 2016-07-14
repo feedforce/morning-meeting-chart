@@ -13,9 +13,11 @@
     .col-xs-5
       h2 Topics
       - if @team.progresses.present?
+        ul.list-group
         - @team.progresses.last.topics.each do |topic|
-          h3
-            = "* #{topic.content}" if topic.content.present?
+          - if topic.content.present?
+            li
+              = topic.content
 
 footer.footer
   .container
