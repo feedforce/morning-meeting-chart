@@ -31,7 +31,7 @@ class GraphCreater
           title: {
             text: '獲得件数', margin: 70
           },
-          max: @team.goal + max,
+          max: max,
           plotLines: [
             {
               value: @team.goal,
@@ -99,7 +99,7 @@ class GraphCreater
 
   def max
     if @team.goal > series_data.sum
-      10
+      @team.goal + 10
     else
       series_data.sum + 10
     end
