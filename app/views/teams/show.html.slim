@@ -34,19 +34,3 @@ footer.footer
         p.footer-text
           - if Team.exists?(id: @team.id + 1)
             = link_to '>>', team_path(@team.id + 1)
-
-style type='text/css'
-  | .footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      /* Set the fixed height of the footer here */
-      height: 60px;
-      background-color: #f5f5f5;
-    }
-    
-    .container .footer-text {
-      font-size: 20px;
-      font-weight: bolder;
-      margin: 20px 0;
-    }
