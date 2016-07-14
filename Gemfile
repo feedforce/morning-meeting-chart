@@ -35,6 +35,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Slim template engine
 gem 'slim-rails'
 
+# Use datetimepicker-rails for pick a date in forms
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

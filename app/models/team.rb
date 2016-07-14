@@ -7,4 +7,22 @@ class Team < ApplicationRecord
   def graph
     GraphCreater.new(self).create
   end
+
+  def goal_formatted
+    if self.goal < 1000
+      ActionController::Base.helpers.number_to_currency(
+        self.goal,
+        format: "%n%u",
+        unit: ' 件',
+        precision: 0
+      )
+    else
+      ActionController::Base.helpers.number_to_currency(
+        self.goal,
+        format: "%n%u",
+        unit: ' 円',
+        precision: 0
+      )
+    end
+  end
 end

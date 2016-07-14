@@ -5,7 +5,7 @@ class ProgressesController < ApplicationController
   def index
     @graph = LazyHighCharts::HighChart.new('graph')
     @graph = @team.graph if @team.graph
-    @progresses = Progress.where(team_id: @team.id)
+    @progresses = Progress.where(team_id: @team.id).order('start_date DESC')
   end
 
   def new
@@ -15,7 +15,9 @@ class ProgressesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
-      Topic.create!(topic_params)
+      topic_params[:content].each do |_key, val|
+        Topic.create!(content: val, progress: @progress)
+      end
     end
     redirect_to team_progresses_path(params[:team_id])
   rescue => e
@@ -44,7 +46,7 @@ class ProgressesController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:content).merge(progress: @progress)
+    params.require(:topic).permit(content: ['1', '2', '3'])
   end
   
   def last_monday

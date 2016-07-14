@@ -1,10 +1,12 @@
-- if notice.present?
-  .container
-    .alert.alert-info
-      = notice
+- if flash[:notice]
+  .container.alert.alert-success
+    = flash[:notice]
+- if flash[:alert]
+  .container.alert.alert-danger
+    = flash[:alert]
+
 .container
-  h1
-    | チーム一覧
+  h1 チーム一覧
 .container
   table.table.table-hover
     thead
@@ -20,10 +22,7 @@
           td.centering
             = team.name
           td.goal
-            - if team.goal < 1000
-              = "#{team.goal} 件"
-            - else
-              = "#{number_to_currency(team.goal, unit: '', precision: 0)} 円"
+            = team.goal_formatted
           td.centering
             = link_to '実績管理', team_progresses_path(team)
           td.centering
@@ -32,5 +31,6 @@
             = link_to 'プレビュー', team
           / td.centering
           /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+
 .container
-  = link_to 'Create New Team', new_team_path
+  = link_to 'チーム新規作成', new_team_path, class: 'btn btn-primary'

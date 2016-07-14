@@ -29,7 +29,11 @@ RSpec.describe "Progresses", type: :request do
           start_date: Date.current
         },
         topic: {
-          content: 'test content'
+          content: {
+            '1' => 'test content',
+            '2' => 'test content 2',
+            '3' => '',
+          },
         },
       }
     end
@@ -44,8 +48,8 @@ RSpec.describe "Progresses", type: :request do
         expect { subject }.to change(Progress, :count).by(1)
       end
 
-      it 'Topic が 1 つ作られる' do
-        expect { subject }.to change(Topic, :count).by(1)
+      it 'Topic が 3 つ作られる' do
+        expect { subject }.to change(Topic, :count).by(3)
       end
     end
   end

@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to action: 'index', notice: '新しいチームが作成されました。' }
+        format.html { redirect_to teams_path, notice: '新しいチームが作成されました。' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }

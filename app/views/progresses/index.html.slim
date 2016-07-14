@@ -1,28 +1,45 @@
-p#notice
-  = notice
-h1
-  | Progresses
-table
-  thead
-    tr
-      th
-        | 週開始日 
-      th
-        | 実績
-      th[colspan="3"]
-  tbody
-    - @progresses.each do |progress|
-      tr
-        td
-          = progress.start_date
-        td
-          = progress.amount
-        td
-          = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }
-        
-p
-  = link_to '新規作成', new_team_progress_path(params[:team_id])
-p
-  = link_to 'チーム一覧へ', teams_path
+- if flash[:notice]
+  .container.alert.alert-success
+    = flash[:notice]
+- if flash[:alert]
+  .container.alert.alert-danger
+    = flash[:alert]
+
 .container
+  h1 実績管理
+  h3
+    = "#{@team.name} チーム - "
+    = "月間目標: #{@team.goal_formatted}"
+
+.container.container-table
+  table.table.table-hover
+    thead
+      tr
+        th
+          | 期間 
+        th
+          | 実績
+        th[colspan="2"]
+    tbody
+      - @progresses.each do |progress|
+        tr
+          td
+            = "#{progress.start_date} ～ #{progress.start_date + 4}"
+          td
+            = progress.amount_formatted
+          td
+            | 編集
+          td
+            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }
+
+.container
+  = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-primary'
+
+hr
+
+.container.container-graph
+  h3 グラフプレビュー
   = high_chart("some_id", @graph)
+
+.container         
+  = link_to 'チーム一覧へ', teams_path, class: 'btn btn-default'
