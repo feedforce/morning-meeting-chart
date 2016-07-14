@@ -1,5 +1,5 @@
 class ProgressesController < ApplicationController
-  before_action :set_team, only: [:index] 
+  before_action :set_team, only: [:index]
   before_action :set_progress, only: [:destroy]
 
   def index
