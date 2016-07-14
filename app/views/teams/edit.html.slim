@@ -1,6 +1,28 @@
-h1
-  | Editing Team
-= render 'form', team: @team
-= link_to 'Show', @team
-|  | 
-= link_to 'Back', teams_path
+.container
+  h1
+    | チーム情報編集
+
+.container
+  hr
+
+.container
+  = form_for @team do |f|
+    .row
+      .col-xs-4
+        .form-group
+          = f.label 'チーム名'
+          = f.text_field :name, class: 'form-control'
+    
+    .row
+      .col-xs-4
+        .form-group
+          = f.label '月間目標'
+          = f.text_field :goal, class: 'form-control'
+
+    .row
+      .col-xs-4
+        .form-group
+          = f.submit '保存', class: 'btn btn-primary'
+
+.container          
+  = link_to '戻る', teams_path, class: 'btn btn-default'
