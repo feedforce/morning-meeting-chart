@@ -4,8 +4,8 @@ class Team < ApplicationRecord
   validates :name, presence: true
   validates :goal, presence: true
 
-  def graph
-    GraphCreater.new(self).create
+  def graph(time)
+    @graph = GraphCreater.new(self).create({ year: 2016, month: 7 })
   end
 
   def goal_formatted

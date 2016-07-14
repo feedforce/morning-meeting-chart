@@ -3,8 +3,7 @@ class ProgressesController < ApplicationController
   before_action :set_progress, only: [:edit, :destroy]
 
   def index
-    @graph = LazyHighCharts::HighChart.new('graph')
-    @graph = @team.graph if @team.graph
+    @graph = @team.graph(graph_params)
     @progresses = Progress.where(team_id: @team.id).order('start_date asc')
   end
 
@@ -54,6 +53,12 @@ class ProgressesController < ApplicationController
 
   def set_progress
     @progress = Progress.find(params[:id])
+  end
+
+  def graph_params
+    params.require(:graph).permit(:year,:month)
+  rescue
+    { year: Time.current.year, month: Time.current.month }
   end
 
   def progress_params
