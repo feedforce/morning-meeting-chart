@@ -7,11 +7,11 @@
 
 .container
   .row
-    .col-xs-7 
+    .col-xs-6 
       - if @team.progresses.present?
         = high_chart("chart-#{@team.id}", @team.graph)
 
-    .col-xs-5
+    .col-xs-6
       h2 Topics
       - if @team.progresses.present?
         - @team.progresses.last.topics.each do |topic|
@@ -30,7 +30,7 @@ footer.footer
           - if Team.exists?(id: @team.id - 1)
             = link_to '<<', team_path(@team.id - 1)
       
-      .col-xs-1.col-xs-offset-3
+      .col-xs-1.col-xs-offset-4
         p.footer-text
           - if Team.exists?(id: @team.id + 1)
             = link_to '>>', team_path(@team.id + 1)
