@@ -63,7 +63,7 @@ class GraphCreater
 
   def categories
     list ||= []
-    @team.progresses.map do |progress|
+    @team.progresses.order('start_date asc').map do |progress|
       list << category_day(progress) if progress.start_date.month == this_month
     end
     list
