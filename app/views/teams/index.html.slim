@@ -12,7 +12,7 @@
   hr
 
 .container
-  table.table.table-hover
+  table.table.table-straiped
     thead
       tr
         th.centering
@@ -28,13 +28,12 @@
           td.goal
             = team.goal_formatted
           td.right-align
-            = link_to '実績管理', team_progresses_path(team), class: 'btn btn-success btn-sm'
+            = link_to '実績管理', team_progresses_path(team), class: 'btn btn-success glyphicon glyphicon-wrench'
           td.right-align
-            = link_to '月間目標編集', edit_team_path(team), class: 'btn btn-success btn-sm'
+            = link_to '月間目標編集', edit_team_path(team), class: 'btn btn-success glyphicon glyphicon-wrench'
           td.right-align
-            = link_to 'プレビュー', team, class: 'btn btn-default btn-sm'
+            = link_to 'プレビュー', team, class: 'btn btn-default glyphicon glyphicon-signal'
           / td.centering
           /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
-
 .container
   = link_to 'チーム新規作成', new_team_path, class: 'btn btn-primary'
