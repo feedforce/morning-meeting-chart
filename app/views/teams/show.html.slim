@@ -16,7 +16,7 @@
         ul.list-group
         - @team.progresses.last.topics.each do |topic|
           - if topic.content.present?
-            li
+            li.topics
               = topic.content
 
 footer.footer
