@@ -18,20 +18,27 @@
           - if topic.content.present?
             li.topics
               = topic.content
-
-footer.footer
-  .container
-    .row
-      .col-xs-1
-        p.footer-text
-          = link_to 'home', teams_path 
-      
-      .col-xs-1.col-xs-offset-2
-        p.footer-text
-          - if Team.exists?(id: @team.id - 1)
-            = link_to '<<', team_path(@team.id - 1)
-      
-      .col-xs-1.col-xs-offset-4
-        p.footer-text
-          - if Team.exists?(id: @team.id + 1)
-            = link_to '>>', team_path(@team.id + 1)
+.container
+  ul.pager
+    - if Team.exists?(id: @team.id - 1)
+      li.previous
+        = link_to(team_path(@team.id - 1)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          | Prev
+    - else
+      li.previous.disabled
+        span aria-hidden="true"
+          | &larr;&nbsp;Prev
+    
+    - if Team.exists?(id: @team.id + 1)
+      li.next
+        = link_to(team_path(@team.id + 1)) do
+          | Next
+          span aria-hidden="true"
+            | &nbsp;&rarr;
+    - else
+      li.next.disabled
+        | Next
+        span aria-hidden="true"
+          | &nbsp;&rarr;
