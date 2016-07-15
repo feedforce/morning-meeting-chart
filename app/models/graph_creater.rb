@@ -12,7 +12,7 @@ class GraphCreater
       series_data.reverse.each_with_index do |data, i|
         f.series(
           type: 'column',
-          name: categories[i],
+          name: categories.reverse[i],
           stacking: 'normal',
           data: create_stack_data(data, i)
         )
