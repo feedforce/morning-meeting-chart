@@ -52,6 +52,7 @@ class ProgressesController < ApplicationController
   end
 
   def set_progress
+    binding.pry
     @progress = Progress.find(params[:id])
   end
 
