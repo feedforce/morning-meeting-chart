@@ -25,20 +25,11 @@
         = link_to(team_path(@team.id - 1)) do
           span aria-hidden="true"
             | &larr;&nbsp;
-          | Prev
-    - else
-      li.previous.disabled
-        span aria-hidden="true"
-          | &larr;&nbsp;Prev
+          = Team.find(@team.id - 1).name
     
     - if Team.exists?(id: @team.id + 1)
       li.next
         = link_to(team_path(@team.id + 1)) do
-          | Next
+          = Team.find(@team.id + 1).name
           span aria-hidden="true"
             | &nbsp;&rarr;
-    - else
-      li.next.disabled
-        | Next
-        span aria-hidden="true"
-          | &nbsp;&rarr;
