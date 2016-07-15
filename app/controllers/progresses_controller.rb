@@ -1,15 +1,29 @@
 class ProgressesController < ApplicationController
-  before_action :set_team, only: [:index] 
-  before_action :set_progress, only: [:destroy]
+  before_action :set_team, only: [:index]
+  before_action :set_progress, only: [:edit, :destroy]
 
   def index
-    @graph = LazyHighCharts::HighChart.new('graph')
-    @graph = @team.graph if @team.graph
-    @progresses = Progress.where(team_id: @team.id).order('start_date DESC')
+    @graph = @team.graph(graph_params)
+    @progresses = Progress.where(team_id: @team.id).order('start_date asc')
   end
 
   def new
     @start_date = last_monday
+  end
+
+  def edit
+  end
+
+  def update
+    ActiveRecord::Base.transaction do
+      @progress.update(progress_params)
+      topic_params[:content].each do |_key, val|
+        topic.update(content: val, progress: @progress)
+      end
+    end
+    redirect_to team_progresses_path(params[:team_id])
+  rescue
+    redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
   def create
@@ -20,7 +34,7 @@ class ProgressesController < ApplicationController
       end
     end
     redirect_to team_progresses_path(params[:team_id])
-  rescue => e
+  rescue
     redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
@@ -41,6 +55,12 @@ class ProgressesController < ApplicationController
     @progress = Progress.find(params[:id])
   end
 
+  def graph_params
+    params.require(:graph).permit(:year,:month)
+  rescue
+    { year: Time.current.year, month: Time.current.month }
+  end
+
   def progress_params
     params.require(:progress).permit(:amount, :start_date).merge(team: Team.find(params[:team_id]))
   end
@@ -48,7 +68,7 @@ class ProgressesController < ApplicationController
   def topic_params
     params.require(:topic).permit(content: ['1', '2', '3'])
   end
-  
+
   def last_monday
     this_day = Date.today
     (this_day - (this_day.wday - 1)) - 7

@@ -16,7 +16,7 @@
     thead
       tr
         th
-          | 期間 
+          | 期間
         th
           | 実績
         th[colspan="2"]
@@ -28,9 +28,9 @@
           td
             = progress.amount_formatted
           td
-            | 編集
+            = link_to '編集', edit_team_progress_path(id: progress.id), method: :edit, class: 'btn btn-success'
           td
-            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
 .container
   = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-primary'
@@ -41,5 +41,5 @@ hr
   h3 グラフプレビュー
   = high_chart("some_id", @graph)
 
-.container         
+.container
   = link_to 'チーム一覧へ', teams_path, class: 'btn btn-default'

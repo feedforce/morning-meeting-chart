@@ -7,11 +7,10 @@
 
 .container
   .row
-    .col-xs-6 
+    .col-xs-7
       - if @team.progresses.present?
-        = high_chart("chart-#{@team.id}", @team.graph)
-
-    .col-xs-6
+        = high_chart("chart-#{@team.id}", @graph)
+    .col-xs-5
       h2 Topics
       - if @team.progresses.present?
         ul.list-group
