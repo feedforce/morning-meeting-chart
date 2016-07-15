@@ -3,15 +3,16 @@ class GraphCreater
     @team = team
   end
 
-  def create
-    return nil if @team.progresses.empty?
+  def create(time)
+    set_progresses(time)
+    return LazyHighCharts::HighChart.new('graph') if @team.progresses.empty?
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)
       series_data.reverse.each_with_index do |data, i|
         f.series(
           type: 'column',
-          name: categories[i],
+          name: categories.reverse[i],
           stacking: 'normal',
           data: create_stack_data(data, i)
         )
@@ -31,7 +32,7 @@ class GraphCreater
           title: {
             text: '獲得件数', margin: 70
           },
-          max: @team.goal + max,
+          max: max,
           plotLines: [
             {
               value: @team.goal,
@@ -53,18 +54,24 @@ class GraphCreater
 
   private
 
-  def this_month
-    @team.progresses.last.start_date.month
+  def set_progresses(time)
+    @time = time
+    @progresses = []
+    @team.progresses.order('start_date asc').each do |progress|
+      if progress.start_date.year == @time[:year] && progress.start_date.month == @time[:month]
+        @progresses << progress
+      end
+    end
   end
 
   def title
-    "#{this_month}月度 #{@team.name}"
+    "#{@time[:year]}年#{@time[:month]}月度 #{@team.name}"
   end
 
   def categories
-    list ||= []
-    @team.progresses.map do |progress|
-      list << category_day(progress) if progress.start_date.month == this_month
+    list = []
+    @progresses.each do |progress|
+      list << category_day(progress)
     end
     list
   end
@@ -75,8 +82,8 @@ class GraphCreater
 
   def series_data
     list = []
-    @team.progresses.each do |progress|
-      list.push(progress.amount) if progress.start_date.month == this_month
+    @progresses.each do |progress|
+      list.push(progress.amount)
     end
     list
   end
@@ -90,7 +97,7 @@ class GraphCreater
     list
   end
 
-  def create_stack_data (data,i)
+  def create_stack_data(data, i)
     tmp = []
     (series_data.size - 1 - i).times { tmp.push(0) }
     (i+1).times { tmp.push(data) }
@@ -99,7 +106,7 @@ class GraphCreater
 
   def max
     if @team.goal > series_data.sum
-      10
+      @team.goal + 10
     else
       series_data.sum + 10
     end
