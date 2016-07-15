@@ -4,9 +4,9 @@
       = "チーム：#{@team.name}"
 .container
   .row
-    .col-xs-7 
+    .col-xs-7
       - if @team.progresses.present?
-        = high_chart("chart-#{@team.id}", @team.graph)
+        = high_chart("chart-#{@team.id}", @graph)
     .col-xs-5
       h2 Topics
       - if @team.progresses.present?
@@ -19,7 +19,7 @@ footer.footer
     .row
       .col-xs-1
         p.footer-text
-          = link_to 'home', teams_path 
+          = link_to 'home', teams_path
       .col-xs-1.col-xs-offset-2
         p.footer-text
           - if Team.exists?(id: @team.id - 1)
