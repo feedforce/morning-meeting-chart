@@ -7,9 +7,9 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-  nav.navbar.navbar-default.navbar-static-top
-    .container
-      .container-header
-        = link_to 'Morning-Meeting', root_path, class: 'navbar-brand'
+    nav.navbar.navbar-default.navbar-static-top
+      .container
+        .container-header
+          = link_to 'Morning-Meeting', root_path, class: 'navbar-brand'
   
-  = yield
+    = yield
