@@ -30,7 +30,7 @@ class GraphCreater
       f.yAxis [
         {
           title: {
-            text: '獲得件数', margin: 70
+            text: entity, margin: 70
           },
           max: max,
           plotLines: [
@@ -110,5 +110,10 @@ class GraphCreater
     else
       series_data.sum + 10
     end
+  end
+
+  def entity
+    return '受注件数' if @team.orders?
+    return '売上(円)' if @team.sales?
   end
 end
