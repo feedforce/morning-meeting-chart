@@ -17,13 +17,13 @@ class ProgressesController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @progress.update(progress_params)
-      topic_params[:content].each do |_key, val|
-        topic.update(content: val, progress: @progress)
+      @progress.topics.each_with_index do |v, index|
+        v.update(content: topic_params[index.to_s])
       end
     end
-    redirect_to team_progresses_path(params[:team_id])
+    redirect_to team_progresses_path(params[:team_id]), notice: '更新されました'
   rescue
-    redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
+    redirect_to edit_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
   def create
