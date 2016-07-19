@@ -2,7 +2,10 @@
   h1
     | チームの新規作成
 
-.container.container-form
+.container
+  hr
+
+.container
   = form_tag("/teams", method: 'post') do
     .row
       .col-xs-4
@@ -22,5 +25,4 @@
           = submit_tag "作成", class: 'btn btn-primary'
 
 .container
-  p
-    = link_to 'チーム一覧に戻る', teams_path
+  = link_to '戻る', teams_path, class: 'btn btn-default'

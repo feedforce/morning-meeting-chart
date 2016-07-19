@@ -1,7 +1,10 @@
 .container
-  p
-    h1
-      = "チーム：#{@team.name}"
+  h1
+    = "#{@team.name} チーム"
+
+.container
+  hr
+
 .container
   .row
     .col-xs-7
@@ -10,51 +13,23 @@
     .col-xs-5
       h2 Topics
       - if @team.progresses.present?
+        ul.list-group
         - @team.progresses.last.topics.each do |topic|
-          h3
-            = topic.content
-
-footer.footer
-  .container
-    .row
-      .col-xs-1
-        p.footer-text
-          = link_to 'home', teams_path
-      .col-xs-1.col-xs-offset-2
-        p.footer-text
-          - if Team.exists?(id: @team.id - 1)
-            = link_to '<<', team_path(@team.id - 1)
-      .col-xs-1.col-xs-offset-3
-        p.footer-text
-          - if Team.exists?(id: @team.id + 1)
-            = link_to '>>', team_path(@team.id + 1)
-
-style type='text/css'
-  | html {
-      position: relative;
-      min-height: 100%;
-    }
-    body {
-      margin-bottom: 60px;
-      margin-right: 0px;
-      margin-left: 0px;
-      margin-top: 0px;
-    }
-    .footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      /* Set the fixed height of the footer here */
-      height: 60px;
-      background-color: #f5f5f5;
-    }
-    .container {
-      max-width: 1280px;
-      width: auto;
-      padding: 0 15px;
-    }
-    .container .footer-text {
-      font-size: 20px;
-      font-weight: bolder;
-      margin: 20px 0;
-    }
+          - if topic.content.present?
+            li.topics
+              = topic.content
+.container
+  ul.pager
+    - if Team.exists?(id: @team.id - 1)
+      li.previous
+        = link_to(team_path(@team.id - 1)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          = Team.find(@team.id - 1).name
+    
+    - if Team.exists?(id: @team.id + 1)
+      li.next
+        = link_to(team_path(@team.id + 1)) do
+          = Team.find(@team.id + 1).name
+          span aria-hidden="true"
+            | &nbsp;&rarr;
