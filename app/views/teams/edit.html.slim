@@ -12,7 +12,7 @@
         .form-group
           = f.label 'チーム名'
           = f.text_field :name, class: 'form-control'
-    
+
     .row
       .col-xs-4
         .form-group
@@ -22,7 +22,12 @@
     .row
       .col-xs-4
         .form-group
+          = select_tag 'team[entity]', options_for_select({ "受注件数": "orders", "売上": "sales" }), class: 'form-control selectpicker'
+
+    .row
+      .col-xs-4
+        .form-group
           = f.submit '保存', class: 'btn btn-primary'
 
-.container          
+.container
   = link_to '戻る', teams_path, class: 'btn btn-default'

@@ -4,12 +4,14 @@ class Team < ApplicationRecord
   validates :name, presence: true
   validates :goal, presence: true
 
+  enum entity: { orders: 0, sales: 1 }
+
   def graph(time)
     @graph = GraphCreater.new(self).create(time)
   end
 
   def goal_formatted
-    if self.goal < 1000
+    if self.orders?
       ActionController::Base.helpers.number_to_currency(
         self.goal,
         format: "%n%u",
