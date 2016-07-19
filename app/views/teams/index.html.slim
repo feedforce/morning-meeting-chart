@@ -33,7 +33,7 @@
             = link_to '月間目標編集', edit_team_path(team), class: 'btn btn-success glyphicon glyphicon-wrench'
           td.right-align
             = link_to 'プレビュー', team, class: 'btn btn-default glyphicon glyphicon-signal'
-          / td.centering
-          /   = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+          td.right-align
+             = link_to 'チーム削除', team, method: :delete, data: { confirm: '削除してよろしいですか？' }, class: 'btn btn-danger glyphicon glyphicon-trash'
 .container
   = link_to 'チーム新規作成', new_team_path, class: 'btn btn-primary'
