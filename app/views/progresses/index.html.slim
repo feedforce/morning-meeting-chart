@@ -30,7 +30,7 @@
           td
             = link_to '編集', edit_team_progress_path(id: progress.id), action: :edit, class: 'btn btn-success glyphicon glyphicon-wrench'
           td
-            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger glyphicon glyphicon-trash'
+            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger glyphicon glyphicon-trash'
 
 .container
   = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-primary'

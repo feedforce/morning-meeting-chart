@@ -38,7 +38,7 @@ class ProgressesController < ApplicationController
         Topic.create!(content: val, progress: @progress)
       end
     end
-    redirect_to team_progresses_path(params[:team_id])
+    redirect_to team_progresses_path(params[:team_id]), notice: '作成されました'
   rescue
     redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
@@ -46,7 +46,7 @@ class ProgressesController < ApplicationController
   def destroy
     @progress.destroy
     respond_to do |format|
-      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: 'Progress was successfully destroyed.' }
+      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: '削除されました' }
     end
   end
 
