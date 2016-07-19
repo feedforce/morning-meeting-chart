@@ -17,8 +17,13 @@ class ProgressesController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @progress.update(progress_params)
-      @progress.topics.each_with_index do |v, index|
-        v.update(content: topic_params[index.to_s])
+      topic_params.each_with_index do |param, index|
+        topic = @progress.topics[index]
+        if topic
+          topic.update!(content: param.last)
+        else
+          @progress.topics.create(content: param.last) if param.last
+        end
       end
     end
     redirect_to team_progresses_path(params[:team_id]), notice: '更新されました'
