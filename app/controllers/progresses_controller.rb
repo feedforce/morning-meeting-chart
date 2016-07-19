@@ -34,8 +34,8 @@ class ProgressesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
-      topic_params[:content].each do |_key, val|
-        Topic.create!(content: val, progress: @progress)
+      topic_params.each do |_key, val|
+        @progress.topics.create!(content: val)
       end
     end
     redirect_to team_progresses_path(params[:team_id]), notice: '作成されました'
