@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20160719112257) do
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.integer  "goal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "entity"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "entity",     default: 0
   end
 
   create_table "topics", force: :cascade do |t|
