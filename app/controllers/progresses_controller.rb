@@ -1,6 +1,6 @@
 class ProgressesController < ApplicationController
   before_action :set_team, only: [:index]
-  before_action :set_progress, only: [:edit, :destroy]
+  before_action :set_progress, only: [:edit, :update, :destroy]
 
   def index
     @graph = @team.graph(graph_params)
@@ -66,7 +66,7 @@ class ProgressesController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(content: ['1', '2', '3'])
+    params.require(:topic).require(:content).permit('0', '1', '2')
   end
 
   def last_monday
