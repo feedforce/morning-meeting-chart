@@ -1,6 +1,6 @@
 class ProgressesController < ApplicationController
   before_action :set_team, only: [:index]
-  before_action :set_progress, only: [:edit, :destroy]
+  before_action :set_progress, only: [:edit, :update, :destroy]
 
   def index
     @graph = @team.graph(graph_params)
@@ -17,23 +17,28 @@ class ProgressesController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @progress.update(progress_params)
-      topic_params[:content].each do |_key, val|
-        topic.update(content: val, progress: @progress)
+      topic_params.each_with_index do |param, index|
+        topic = @progress.topics[index]
+        if topic
+          topic.update!(content: param.last)
+        else
+          @progress.topics.create(content: param.last) if param.last
+        end
       end
     end
-    redirect_to team_progresses_path(params[:team_id])
+    redirect_to team_progresses_path(params[:team_id]), notice: '更新されました'
   rescue
-    redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
+    redirect_to edit_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
-      topic_params[:content].each do |_key, val|
-        Topic.create!(content: val, progress: @progress)
+      topic_params.each do |_key, val|
+        @progress.topics.create!(content: val)
       end
     end
-    redirect_to team_progresses_path(params[:team_id])
+    redirect_to team_progresses_path(params[:team_id]), notice: '作成されました'
   rescue
     redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
@@ -41,7 +46,7 @@ class ProgressesController < ApplicationController
   def destroy
     @progress.destroy
     respond_to do |format|
-      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: 'Progress was successfully destroyed.' }
+      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: '削除されました' }
     end
   end
 
@@ -66,7 +71,7 @@ class ProgressesController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(content: ['1', '2', '3'])
+    params.require(:topic).require(:content).permit('0', '1', '2')
   end
 
   def last_monday

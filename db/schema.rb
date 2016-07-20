@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706014044) do
+ActiveRecord::Schema.define(version: 20160719112257) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20160706014044) do
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.integer  "goal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "entity",     default: 0
   end
 
   create_table "topics", force: :cascade do |t|
