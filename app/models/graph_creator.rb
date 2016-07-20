@@ -1,4 +1,4 @@
-class GraphCreater
+class GraphCreator
   def initialize(team)
     @team = team
   end
