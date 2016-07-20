@@ -25,6 +25,8 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -84,4 +86,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.middleware.insert 0, Rack::IpAddressRestriction, '/' => %w(127.0.0.1) + ["#{ENV['ALLOW_IP']}"]
+  config.serve_static_assets = true
 end
