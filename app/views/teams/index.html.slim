@@ -18,34 +18,34 @@
         tr
           td.centering
             = team.name
-          
+
           td.goal
             = team.goal_formatted
-          
+
           td.right-align
             = link_to team_progresses_path(team) do
               button.btn.btn-success
                 span.glyphicon.glyphicon-wrench.btn-icon
                 | 実績管理
-         
+
           td.right-align
             = link_to edit_team_path(team) do
               button.btn.btn-success
                 span.glyphicon.glyphicon-wrench.btn-icon
                 | 月間目標編集
-          
+
           td.right-align
             = link_to team do
               button.btn.btn-default
                 span.glyphicon.glyphicon-stats.btn-icon
                 | プレビュー
-          
+
           td.right-align
             = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' } do
               button.btn.btn-danger
                 span.glyphicon.glyphicon-trash.btn-icon
                 | チーム削除
-          
+
 .container
   = link_to new_team_path do
     button.btn.btn-primary
