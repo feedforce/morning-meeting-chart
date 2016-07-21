@@ -7,6 +7,8 @@ class Progress < ApplicationRecord
   validates :start_date, presence: true
   validates :amount, presence: true
 
+  scope :latest, -> { order(:start_date).last }
+
   def amount_formatted
     if self.amount < 1000
       ActionController::Base.helpers.number_to_currency(

@@ -13,7 +13,7 @@
   h2 Topics
   - if @team.progresses.present?
     ul.list-group
-    - @team.progresses.last.topics.each do |topic|
+    - @team.progresses.latest.topics.each do |topic|
       - if topic.content.present?
         li.topics
           = topic.content
