@@ -18,10 +18,12 @@
         .form-group
           = label_tag '当月目標'
           = text_field_tag 'team[goal]', 0, class: 'form-control'
+
     .row
       .col-xs-4
         .form-group
-          = select_tag 'team[entity]', options_for_select({ "受注件数": "orders", "売上": "sales" }), class: 'form-control selectpicker'
+          = label_tag '目標種別'
+          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
 
     .row
       .col-xs-4
