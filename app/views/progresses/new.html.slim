@@ -40,8 +40,9 @@
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = submit_tag "登録", class: 'btn btn-primary'
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 登録
 
 .container
   = link_to '戻る', team_progresses_path(params[:team_id]), class: 'btn btn-default'
