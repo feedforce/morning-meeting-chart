@@ -21,7 +21,7 @@
           | 実績
         th[colspan="2"]
     tbody
-      - @progresses.each do |progress|
+      - @progresses.order(:start_date).each do |progress|
         tr
           td
             = "#{progress.start_date} ～ #{progress.start_date + 4}"
