@@ -18,15 +18,27 @@
         tr
           td
             = "#{progress.start_date} ～ #{progress.start_date + 4}"
+
           td
             = progress.amount_formatted
+
           td
-            = link_to '編集', edit_team_progress_path(id: progress.id), action: :edit, class: 'btn btn-success glyphicon glyphicon-wrench'
+            = link_to edit_team_progress_path(id: progress.id), action: :edit do
+              button.btn.btn-success
+                span.glyphicon.glyphicon-wrench.btn-icon
+                | 編集
+
           td
-            = link_to '削除', team_progress_path(id: progress.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger glyphicon glyphicon-trash'
+            = link_to team_progress_path(id: progress.id), method: :delete, data: { confirm: '削除してよろしいですか？' } do
+              button.btn.btn-danger
+                span.glyphicon.glyphicon-trash.btn-icon
+                | 削除
 
 .container
-  = link_to '実績の新規登録', new_team_progress_path(params[:team_id]), class: 'btn btn-primary'
+  = link_to new_team_progress_path(params[:team_id]) do
+    button.btn.btn-primary
+      span.glyphicon.glyphicon-plus.btn-icon
+      | 実績の新規登録
 
 hr
 
