@@ -17,7 +17,7 @@
       - @progresses.order(:start_date).each do |progress|
         tr
           td
-            = "#{progress.start_date} ～ #{progress.start_date + 4}"
+            = "#{progress.start_date} ～ #{progress.end_date}"
 
           td
             = progress.amount_formatted

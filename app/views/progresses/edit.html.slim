@@ -16,6 +16,12 @@
     .row
       .col-xs-5
         .form-group
+          = label_tag '週終了日'
+          = text_field_tag 'progress[end_date]', @progress.end_date,  class: 'form-control', id: 'datetimepicker4'
+
+    .row
+      .col-xs-5
+        .form-group
           .form-group
             = label_tag '成果'
             = text_field_tag 'progress[amount]', @progress.amount, class: 'form-control'

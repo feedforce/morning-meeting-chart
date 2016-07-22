@@ -9,6 +9,7 @@ class ProgressesController < ApplicationController
 
   def new
     @start_date = last_monday
+    @end_date = last_monday + 4
   end
 
   def edit
@@ -67,7 +68,7 @@ class ProgressesController < ApplicationController
   end
 
   def progress_params
-    params.require(:progress).permit(:amount, :start_date).merge(team: Team.find(params[:team_id]))
+    params.require(:progress).permit(:amount, :start_date, :end_date).merge(team: Team.find(params[:team_id]))
   end
 
   def topic_params
