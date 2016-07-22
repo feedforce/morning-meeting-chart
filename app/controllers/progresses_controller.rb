@@ -75,7 +75,11 @@ class ProgressesController < ApplicationController
   end
 
   def last_monday
-    this_day = Date.today
-    (this_day - (this_day.wday - 1)) - 7
+    today = Date.today
+    if today.wday > 1
+      today - (today.wday - 1)
+    else
+      today - (8 - today.wday)
+    end
   end
 end
