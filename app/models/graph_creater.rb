@@ -33,6 +33,7 @@ class GraphCreater
             text: entity, margin: 70
           },
           max: max,
+          allowDecimals: false,
           plotLines: [
             {
               value: @team.goal,
