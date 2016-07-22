@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :current_time, only: [:show]
+
   # GET /teams
   # GET /teams.json
   def index
@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @graph = GraphCreator.new(@team).create(current_time)
+    @graph = GraphCreater.new(@team).create(current_time) if @team.progresses.present?
   end
 
   # GET /teams/new
@@ -63,7 +63,8 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
   end
