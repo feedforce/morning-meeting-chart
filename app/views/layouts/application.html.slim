@@ -11,5 +11,12 @@ html
       .container
         .container-header
           = link_to 'Morning-Meeting', root_path, class: 'navbar-brand'
-  
+
+    - if flash[:notice]
+      .container.alert.alert-success
+        = flash[:notice]
+    - if flash[:alert]
+      .container.alert.alert-danger
+        = flash[:alert]
+
     = yield

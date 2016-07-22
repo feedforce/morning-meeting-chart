@@ -6,18 +6,23 @@
   hr
 
 .container
-  .row
-    .col-xs-7
-      - if @team.progresses.present?
-        = high_chart("chart-#{@team.id}", @graph)
-    .col-xs-5
-      h2 Topics
-      - if @team.progresses.present?
-        ul.list-group
-        - @team.progresses.last.topics.each do |topic|
-          - if topic.content.present?
-            li.topics
-              = topic.content
+  - if @team.progresses.present?
+    = high_chart("chart-#{@team.id}", @graph)
+
+.container
+  hr
+
+.container  
+  h2
+    span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
+    | Topics
+  - if @team.progresses.present?
+    ul.list-group
+    - @team.progresses.latest.topics.each do |topic|
+      - if topic.content.present?
+        li.topics
+          = topic.content
+
 .container
   ul.pager
     - if Team.exists?(id: @team.id - 1)

@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
-  has_many :progresses
+  has_many :progresses, dependent: :destroy
 
   validates :name, presence: true
   validates :goal, presence: true
