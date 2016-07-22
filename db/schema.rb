@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719112257) do
+ActiveRecord::Schema.define(version: 20160722083105) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160719112257) do
     t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "end_date"
     t.index ["team_id"], name: "index_progresses_on_team_id"
   end
 
