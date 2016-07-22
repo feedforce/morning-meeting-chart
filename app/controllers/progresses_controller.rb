@@ -29,6 +29,8 @@ class ProgressesController < ApplicationController
     end
     redirect_to team_progresses_path(params[:team_id]), notice: '更新されました'
   rescue
+    logger.error @progress
+    logger.error progress_params
     redirect_to edit_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
@@ -41,6 +43,8 @@ class ProgressesController < ApplicationController
     end
     redirect_to team_progresses_path(params[:team_id]), notice: '作成されました'
   rescue
+    logger.error @progress
+    logger.error progress_params
     redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
   end
 
