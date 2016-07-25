@@ -6,22 +6,23 @@
   hr
 
 .container
-  - if @team.progresses.present?
-    = high_chart("chart-#{@team.id}", @graph)
+  .row
+    .col-xs-6
+      - if @team.progresses.present?
+        = high_chart("chart-#{@team.id}", @graph)
+    .col-xs-6
+      h2
+        span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
+        | Topics
+      - if @team.progresses.present?
+        ul.list-group
+        - @team.progresses.latest.topics.each do |topic|
+          - if topic.content.present?
+            li.topics
+              = topic.content
 
 .container
   hr
-
-.container  
-  h2
-    span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
-    | Topics
-  - if @team.progresses.present?
-    ul.list-group
-    - @team.progresses.latest.topics.each do |topic|
-      - if topic.content.present?
-        li.topics
-          = topic.content
 
 .container
   ul.pager
@@ -31,7 +32,7 @@
           span aria-hidden="true"
             | &larr;&nbsp;
           = Team.find(@team.id - 1).name
-    
+
     - if Team.exists?(id: @team.id + 1)
       li.next
         = link_to(team_path(@team.id + 1)) do
