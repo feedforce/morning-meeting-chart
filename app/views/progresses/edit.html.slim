@@ -11,7 +11,13 @@
       .col-xs-5
         .form-group
           = label_tag '週開始日'
-          = text_field_tag 'progress[start_date]', @progress.start_date,  class: 'form-control', id: 'datetimepicker4'
+          = text_field_tag 'progress[start_date]', @progress.start_date,  class: 'form-control', id: 'datetimepicker3'
+
+    .row
+      .col-xs-5
+        .form-group
+          = label_tag '週終了日'
+          = text_field_tag 'progress[end_date]', @progress.end_date,  class: 'form-control', id: 'datetimepicker4'
 
     .row
       .col-xs-5
@@ -44,9 +50,9 @@
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = submit_tag "更新", class: 'btn btn-primary'
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 更新
 
 .container
-  p
-    = link_to '戻る', team_progresses_path(params[:team_id])
+  = link_to '戻る', team_progresses_path(params[:team_id]), class: 'btn btn-default'

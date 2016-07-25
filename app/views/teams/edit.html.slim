@@ -22,12 +22,14 @@
     .row
       .col-xs-4
         .form-group
-          = select_tag 'team[entity]', options_for_select({ "受注件数": "orders", "売上": "sales" }), class: 'form-control selectpicker'
+          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
 
     .row
       .col-xs-4
         .form-group
-          = f.submit '保存', class: 'btn btn-primary'
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 保存
 
 .container
   = link_to '戻る', teams_path, class: 'btn btn-default'

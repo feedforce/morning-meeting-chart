@@ -18,15 +18,19 @@
         .form-group
           = label_tag '当月目標'
           = text_field_tag 'team[goal]', 0, class: 'form-control'
-    .row
-      .col-xs-4
-        .form-group
-          = select_tag 'team[entity]', options_for_select({ "受注件数": "orders", "売上": "sales" }), class: 'form-control selectpicker'
 
     .row
       .col-xs-4
         .form-group
-          = submit_tag "作成", class: 'btn btn-primary'
+          = label_tag '目標種別'
+          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
+
+    .row
+      .col-xs-4
+        .form-group
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 作成
 
 .container
   = link_to '戻る', teams_path, class: 'btn btn-default'

@@ -1,10 +1,3 @@
-- if flash[:notice]
-  .alert.alert-success
-    = flash[:notice]
-- if flash[:alert]
-  .alert.alert-danger
-    = flash[:alert]
-
 .container
   h1 進捗どうですか？
 
@@ -14,42 +7,44 @@
       .col-xs-5
         .form-group
           = label_tag '週開始日'
-          = text_field_tag 'progress[start_date]', '',  class: 'form-control', id: 'datetimepicker4'
+          = text_field_tag 'progress[start_date]', @start_date,  class: 'form-control', id: 'datetimepicker3'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag '成果'
-            = text_field_tag 'progress[amount]', nil, class: 'form-control'
+          = label_tag '週終了日'
+          = text_field_tag 'progress[end_date]', @end_date,  class: 'form-control', id: 'datetimepicker4'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag 'トピック1'
-            = text_field_tag 'topic[content][0]', nil, class: 'form-control'
+          = label_tag '成果'
+          = text_field_tag 'progress[amount]', nil, class: 'form-control'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag 'トピック2'
-            = text_field_tag 'topic[content][1]', nil, class: 'form-control'
+          = label_tag 'トピック1'
+          = text_field_tag 'topic[content][0]', nil, class: 'form-control'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag 'トピック3'
-            = text_field_tag 'topic[content][2]', nil, class: 'form-control'
+          = label_tag 'トピック2'
+          = text_field_tag 'topic[content][1]', nil, class: 'form-control'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = submit_tag "登録", class: 'btn btn-primary'
+          = label_tag 'トピック3'
+          = text_field_tag 'topic[content][2]', nil, class: 'form-control'
+
+    .row
+      .col-xs-5
+        .form-group
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 登録
 
 .container
-  p
-    = link_to '戻る', team_progresses_path(params[:team_id])
+  = link_to '戻る', team_progresses_path(params[:team_id]), class: 'btn btn-default'
