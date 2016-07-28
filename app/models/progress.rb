@@ -1,5 +1,6 @@
 class Progress < ApplicationRecord
   has_many :topics, dependent: :destroy
+  belongs_to :goal
 
   validates :start_date, presence: true
   validates :amount, presence: true
