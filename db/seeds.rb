@@ -10,7 +10,7 @@ team = FactoryGirl.create(:team)
 goal = FactoryGirl.create(:goal, team: team)
 date = Date.new(2016,7,1)
 4.times do
-  pr = FactoryGirl.create(:progress, team: team, start_date: date)
+  pr = FactoryGirl.create(:progress, goal: goal, start_date: date)
   FactoryGirl.create(:topic, progress: pr)
   date += 1.weeks
 end
