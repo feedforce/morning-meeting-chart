@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722083105) do
+ActiveRecord::Schema.define(version: 20160728153406) do
 
   create_table "progresses", force: :cascade do |t|
     t.integer  "team_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160722083105) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "entity",     default: 0
+    t.integer  "order"
   end
 
   create_table "topics", force: :cascade do |t|
