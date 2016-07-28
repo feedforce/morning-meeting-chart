@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @graph = GraphCreater.new(@team).create(current_time) if @team.progresses.present?
+    @graph = GraphCreater.new(@team).create(current_time) if @team.has_current_month_progresses?
   end
 
   # GET /teams/new
