@@ -1,6 +1,5 @@
 class Team < ApplicationRecord
   validates :name, presence: true
-  validates :goal, presence: true
   validates :order, presence: true, uniqueness: true
 
   enum entity: { orders: 0, sales: 1 }
