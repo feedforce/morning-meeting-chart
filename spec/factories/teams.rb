@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :team do
     sequence(:name) { |i| "チーム#{i}" }
-    goal { rand(10) + 15 }
+    entity 0
   end
 end
