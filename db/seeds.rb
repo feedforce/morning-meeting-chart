@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 team = FactoryGirl.create(:team)
+goal = FactoryGirl.create(:goal, team: team)
 date = Date.new(2016,7,1)
 4.times do
   pr = FactoryGirl.create(:progress, team: team, start_date: date)
