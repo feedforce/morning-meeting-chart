@@ -1,8 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :team do
-    sequence(:name) { |i| "チーム#{i}" }
-    entity 0
+  factory :goal do
+    team
+    date Date.current
+    goal { rand(10) + 15 }
   end
 end

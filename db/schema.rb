@@ -10,21 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722083105) do
+ActiveRecord::Schema.define(version: 20160728123806) do
+
+  create_table "goals", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "goal"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_goals_on_team_id"
+  end
 
   create_table "progresses", force: :cascade do |t|
-    t.integer  "team_id"
     t.date     "start_date"
     t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date     "end_date"
-    t.index ["team_id"], name: "index_progresses_on_team_id"
+    t.integer  "goal_id"
+    t.index ["goal_id"], name: "index_progresses_on_goal_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "goal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "entity",     default: 0
