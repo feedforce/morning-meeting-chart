@@ -27,8 +27,4 @@ class Team < ApplicationRecord
       )
     end
   end
-
-  def has_current_month_progresses?
-    self.progresses.where("start_date like '%-_?-%'", Date.today.month).size > 0 ? true : false
-  end
 end

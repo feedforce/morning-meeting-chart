@@ -8,6 +8,10 @@ class Progress < ApplicationRecord
   validates :amount, presence: true
 
   scope :latest, -> { order(:start_date).last }
+  scope :current_month_progresses,
+    -> (team_id) {
+      where(team_id: team_id, start_date: Date.today.beginning_of_month .. Date.today.end_of_month)
+    }
 
   def amount_formatted
     if self.amount < 1000
