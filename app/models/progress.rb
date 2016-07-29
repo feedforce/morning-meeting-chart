@@ -1,8 +1,6 @@
 class Progress < ApplicationRecord
-  # after_initialize :set_default, if: :new_record?
-
-  belongs_to :team
   has_many :topics, dependent: :destroy
+  belongs_to :goal
 
   validates :start_date, presence: true
   validates :amount, presence: true

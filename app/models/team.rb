@@ -1,8 +1,7 @@
 class Team < ApplicationRecord
-  has_many :progresses, dependent: :destroy
+  has_many :goals, dependent: :destroy
 
   validates :name, presence: true
-  validates :goal, presence: true
 
   enum entity: { orders: 0, sales: 1 }
 
