@@ -32,11 +32,11 @@ class Team < ApplicationRecord
     end
   end
 
-  def has_prev_team?
-    Team.exists?(['"order" < ?', self.order])
+  def self.has_prev_team?(order)
+    exists?(['"order" < ?', order])
   end
 
-  def has_next_team?
-    Team.exists?(['"order" > ?', self.order])
+  def self.has_next_team?(order)
+    exists?(['"order" > ?', order])
   end
 end
