@@ -22,10 +22,10 @@
             = team.name
 
           td.right-align
-            = link_to team_goal_path(team) do
+            = link_to team_goal_index_path(team) do
               button.btn.btn-success
                 span.glyphicon.glyphicon-wrench.btn-icon
-                | 月間目標一覧
+                | 目標一覧
 
           td.right-align
             = link_to edit_team_path(team) do
