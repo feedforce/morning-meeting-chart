@@ -7,6 +7,9 @@ class Team < ApplicationRecord
 
   enum entity: { orders: 0, sales: 1 }
 
+  scope :prev_team, -> (order) { where('"order" < ?', order).order(:order).last }
+  scope :next_team, -> (order) { where('"order" > ?', order).order(:order).first }
+
   def graph(time)
     @graph = GraphCreator.new(self).create(time)
   end
@@ -27,5 +30,13 @@ class Team < ApplicationRecord
         precision: 0
       )
     end
+  end
+
+  def has_prev_team?
+    Team.exists?(['"order" < ?', self.order])
+  end
+
+  def has_next_team?
+    Team.exists?(['"order" > ?', self.order])
   end
 end

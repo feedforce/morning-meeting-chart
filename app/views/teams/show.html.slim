@@ -26,16 +26,18 @@
 
 .container
   ul.pager
-    - if Team.exists?(id: @team.id - 1)
+    - if @team.has_prev_team?
       li.previous
-        = link_to(team_path(@team.id - 1)) do
+        - prev_team = Team.prev_team(@team.order)
+        = link_to(team_path(prev_team.id)) do
           span aria-hidden="true"
             | &larr;&nbsp;
-          = Team.find(@team.id - 1).name
+          = prev_team.name
 
-    - if Team.exists?(id: @team.id + 1)
+    - if @team.has_next_team?
       li.next
-        = link_to(team_path(@team.id + 1)) do
-          = Team.find(@team.id + 1).name
+        - next_team = Team.next_team(@team.order)
+        = link_to(team_path(next_team.id)) do
+          = next_team.name
           span aria-hidden="true"
             | &nbsp;&rarr;
