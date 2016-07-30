@@ -28,24 +28,29 @@
           td.right-align
             = link_to team_progresses_path(team) do
               button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon 実績管理
+                span.glyphicon.glyphicon-wrench.btn-icon
+                | 実績管理
 
           td.right-align
             = link_to edit_team_path(team) do
               button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon 月間目標編集
+                span.glyphicon.glyphicon-wrench.btn-icon
+                | 月間目標編集
 
           td.right-align
             = link_to team do
               button.btn.btn-default
-                span.glyphicon.glyphicon-stats.btn-icon プレビュー
+                span.glyphicon.glyphicon-stats.btn-icon
+                | プレビュー
 
           td.right-align
             = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' } do
               button.btn.btn-danger
-                span.glyphicon.glyphicon-trash.btn-icon チーム削除
+                span.glyphicon.glyphicon-trash.btn-icon
+                | チーム削除
 
 .container
   = link_to new_team_path do
     button.btn.btn-primary
-      span.glyphicon.glyphicon-plus.btn-icon チーム新規作成
+      span.glyphicon.glyphicon-plus.btn-icon
+      | チーム新規作成
