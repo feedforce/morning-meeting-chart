@@ -1,11 +1,12 @@
 class ProgressesController < ApplicationController
   before_action :set_team, only: [:index, :update, :create]
+  before_action :set_goal, only: [:index]
   before_action :set_progress, only: [:edit, :update, :destroy]
   before_action :set_last_goal, only: [:update, :create]
 
   def index
-    @graph = @team.graph(graph_params)
-    @progresses = Progress.where(team_id: @team.id).order('start_date asc')
+    #@graph = @team.graph(graph_params)
+    @progresses = @team.goals.find(params[:goal_id]).progresses.order('start_date asc')
   end
 
   def new
@@ -60,6 +61,10 @@ class ProgressesController < ApplicationController
 
   def set_team
     @team = Team.find(params[:team_id])
+  end
+
+  def set_goal
+    @goal = Goal.find(params[:goal_id])
   end
 
   def set_progress
