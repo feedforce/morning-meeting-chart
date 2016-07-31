@@ -16,7 +16,7 @@
 
         .form-group
           = f.label '発表順'
-          = text_field_tag 'team[order]', @team.order || Team.maximum(:order) + 1, class: 'form-control'
+          = text_field_tag 'team[order]', @team.order || (Team.maximum(:order) || 0) + 1, class: 'form-control'
 
         .form-group
           = button_tag type: "submit", class: 'btn btn-primary' do
