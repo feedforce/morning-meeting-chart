@@ -50,6 +50,7 @@ class GraphCreator
         }
       ]
       f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
+      f.chart({ height: 700 })
     end
   end
 
