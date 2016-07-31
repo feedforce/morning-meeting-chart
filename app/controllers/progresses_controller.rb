@@ -42,7 +42,7 @@ class ProgressesController < ApplicationController
     end
     redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '作成されました'
   rescue
-    redirect_to new_team_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
+    redirect_to new_team_goal_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
   end
 
   def destroy
