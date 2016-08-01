@@ -2,7 +2,7 @@
   h1 進捗どうですか？
 
 .container.container-form
-  = form_tag("/teams/#{params[:team_id]}/goal/#{params[:goal_id]}/progresses", method: 'post') do
+  = form_tag("/teams/#{params[:team_id]}/goals/#{params[:goal_id]}/progresses", method: 'post') do
     .row
       .col-xs-5
         .form-group
