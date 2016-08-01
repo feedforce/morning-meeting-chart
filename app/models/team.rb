@@ -13,24 +13,6 @@ class Team < ApplicationRecord
     @graph = GraphCreator.new(self).create(time)
   end
 
-  def goal_formatted
-    if orders?
-      ActionController::Base.helpers.number_to_currency(
-        goals.last.goal,
-        format: "%n%u",
-        unit: ' 件',
-        precision: 0
-      )
-    else
-      ActionController::Base.helpers.number_to_currency(
-        goals.last.goal,
-        format: "%n%u",
-        unit: ' 円',
-        precision: 0
-      )
-    end
-  end
-
   def self.has_prev_team?(order)
     exists?(['"order" < ?', order])
   end
