@@ -1,10 +1,13 @@
 class GoalsController < ApplicationController
   before_action :set_team
-  before_action :set_goal, only: [:edit]
+  before_action :set_goal, only: [:edit, :update]
   before_action :set_entity, only: [:new, :edit]
 
   def index
     @goals = @team.goals
+  end
+
+  def edit
   end
 
   def new
@@ -19,6 +22,16 @@ class GoalsController < ApplicationController
         format.html { redirect_to team_goals_path(@team), notice: '新しい目標が作成されました' }
       else
         format.html { render :new }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @goal.update(goal_params)
+        format.html { redirect_to team_goals_path(@team), notice: '目標の更新に成功しました。' }
+      else
+        format.html { redirect_to edit_team_goal_path(@team), alert: '入力に不備があります' }
       end
     end
   end

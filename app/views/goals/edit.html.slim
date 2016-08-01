@@ -1,0 +1,11 @@
+.container
+  h1
+    | 目標の編集
+
+.container
+  hr
+
+= render partial: 'form'
+
+.container
+  = link_to '戻る', team_goals_path(params[:team_id]), class: 'btn btn-default'
