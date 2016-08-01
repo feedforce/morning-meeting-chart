@@ -21,7 +21,7 @@ class GoalsController < ApplicationController
       if goal.save
         format.html { redirect_to team_goals_path(@team), notice: '新しい目標が作成されました' }
       else
-        format.html { render :new }
+        format.html { redirect_to new_team_goal_path(@team), alert: '入力に不備があります' }
       end
     end
   end
