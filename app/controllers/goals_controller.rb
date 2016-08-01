@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :set_team
-  before_action :set_goal, only: [:edit, :update]
+  before_action :set_goal, only: [:edit, :update, :destroy]
   before_action :set_entity, only: [:new, :edit]
 
   def index
@@ -33,6 +33,13 @@ class GoalsController < ApplicationController
       else
         format.html { redirect_to edit_team_goal_path(@team), alert: '入力に不備があります。' }
       end
+    end
+  end
+
+  def destroy
+    @goal.destroy
+    respond_to do |format|
+      format.html { redirect_to team_goals_path(@team), notice: '削除されました' }
     end
   end
 
