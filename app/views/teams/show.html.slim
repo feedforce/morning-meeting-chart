@@ -2,10 +2,10 @@
   h1
     = "#{@team.name} チーム"
 
-.container
+.container-preview
   hr
 
-.container
+.container-preview
   .row
     .col-xs-6
       - if @team.progresses.present?
@@ -21,10 +21,10 @@
             li.topics
               = topic.content
 
-.container
+.container-preview
   hr
 
-.container
+.container-preview
   ul.pager
     - if Team.has_prev_team?(@team.order)
       li.previous

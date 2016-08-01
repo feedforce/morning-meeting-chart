@@ -30,7 +30,7 @@ class GraphCreator
       f.yAxis [
         {
           title: {
-            text: entity, margin: 70
+            text: entity, margin: 10
           },
           max: max,
           allowDecimals: false,
@@ -50,6 +50,7 @@ class GraphCreator
         }
       ]
       f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
+      f.chart({ height: 500 })
     end
   end
 
