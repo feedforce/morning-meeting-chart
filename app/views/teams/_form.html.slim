@@ -7,10 +7,6 @@
           = f.text_field :name, class: 'form-control'
 
         .form-group
-          = f.label '当月目標'
-          = f.text_field :goal, class: 'form-control'
-
-        .form-group
           = f.label '目標種別'
           = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
 

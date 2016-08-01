@@ -2,7 +2,7 @@
   h1 進捗どうですか？
 
 .container.container-form
-  = form_tag("/teams/#{params[:team_id]}/progresses", method: 'post') do
+  = form_tag("/teams/#{params[:team_id]}/goals/#{params[:goal_id]}/progresses", method: 'post') do
     .row
       .col-xs-5
         .form-group
@@ -47,4 +47,4 @@
             | 登録
 
 .container
-  = link_to '戻る', team_progresses_path(params[:team_id]), class: 'btn btn-default'
+  = link_to '戻る', team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), class: 'btn btn-default'

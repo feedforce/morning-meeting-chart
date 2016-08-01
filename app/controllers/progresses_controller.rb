@@ -1,10 +1,11 @@
 class ProgressesController < ApplicationController
   before_action :set_team, only: [:index]
+  before_action :set_goal, only: [:index]
   before_action :set_progress, only: [:edit, :update, :destroy]
 
   def index
-    @graph = @team.graph(graph_params)
-    @progresses = Progress.where(team_id: @team.id).order('start_date asc')
+    #@graph = @team.graph(graph_params)
+    @progresses = @team.goals.find(params[:goal_id]).progresses.order('start_date asc')
   end
 
   def new
@@ -27,11 +28,9 @@ class ProgressesController < ApplicationController
         end
       end
     end
-    redirect_to team_progresses_path(params[:team_id]), notice: '更新されました'
+    redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '更新されました'
   rescue
-    logger.error @progress
-    logger.error progress_params
-    redirect_to edit_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
+    redirect_to edit_team_goal_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
   end
 
   def create
@@ -41,17 +40,15 @@ class ProgressesController < ApplicationController
         @progress.topics.create!(content: val)
       end
     end
-    redirect_to team_progresses_path(params[:team_id]), notice: '作成されました'
+    redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '作成されました'
   rescue
-    logger.error @progress
-    logger.error progress_params
-    redirect_to new_team_progress_path(params[:team_id]),  alert: '入力に不備があります'
+    redirect_to new_team_goal_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
   end
 
   def destroy
     @progress.destroy
     respond_to do |format|
-      format.html { redirect_to team_progresses_path(team_id: params[:team_id]), notice: '削除されました' }
+      format.html { redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '削除されました' }
     end
   end
 
@@ -59,6 +56,10 @@ class ProgressesController < ApplicationController
 
   def set_team
     @team = Team.find(params[:team_id])
+  end
+
+  def set_goal
+    @goal = Goal.find(params[:goal_id])
   end
 
   def set_progress
@@ -72,7 +73,7 @@ class ProgressesController < ApplicationController
   end
 
   def progress_params
-    params.require(:progress).permit(:amount, :start_date, :end_date).merge(team: Team.find(params[:team_id]))
+    params.require(:progress).permit(:amount, :start_date, :end_date).merge(goal: Goal.find(params[:goal_id]))
   end
 
   def topic_params

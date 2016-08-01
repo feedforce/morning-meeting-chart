@@ -6,7 +6,7 @@
   hr
 
 .container.container-form
-  = form_tag("/teams/#{params[:team_id]}/progresses/#{params[:id]}", method: 'patch') do
+  = form_tag("/teams/#{params[:team_id]}/goals/#{params[:goal_id]}/progresses/#{params[:id]}", method: 'patch') do
     .row
       .col-xs-5
         .form-group
@@ -55,4 +55,4 @@
             | 更新
 
 .container
-  = link_to '戻る', team_progresses_path(params[:team_id]), class: 'btn btn-default'
+  = link_to '戻る', team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), class: 'btn btn-default'
