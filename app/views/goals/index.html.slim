@@ -8,23 +8,23 @@
   table.table.table-striped
     thead
       tr
-        th
+        th.centering
           | 年
-        th
+        th.centering
           | 月
-        th
+        th.centering
           | 今月の目標
         th[colspan="4"]
     tbody
       - @goals.order(:date).each do |goal|
         tr
-          td
+          td.centering
             = "#{goal.date.year}"
 
-          td
+          td.centering
             = "#{goal.date.month}"
 
-          td
+          td.centering
             = goal.goal_formatted
 
           td
