@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'teams#index'
   resources :teams do
-    resources :goal do
+    resources :goals do
       resources :progresses
     end
   end
