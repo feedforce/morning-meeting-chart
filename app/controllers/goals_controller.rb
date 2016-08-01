@@ -19,9 +19,9 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if goal.save
-        format.html { redirect_to team_goals_path(@team), notice: '新しい目標が作成されました' }
+        format.html { redirect_to team_goals_path(@team), notice: '新しい目標が作成されました。' }
       else
-        format.html { redirect_to new_team_goal_path(@team), alert: '入力に不備があります' }
+        format.html { redirect_to new_team_goal_path(@team), alert: '入力に不備があります。' }
       end
     end
   end
@@ -31,7 +31,7 @@ class GoalsController < ApplicationController
       if @goal.update(goal_params)
         format.html { redirect_to team_goals_path(@team), notice: '目標の更新に成功しました。' }
       else
-        format.html { redirect_to edit_team_goal_path(@team), alert: '入力に不備があります' }
+        format.html { redirect_to edit_team_goal_path(@team), alert: '入力に不備があります。' }
       end
     end
   end
