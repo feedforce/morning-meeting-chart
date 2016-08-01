@@ -1,0 +1,16 @@
+.container
+  = form_for([@team, @goal]) do |f|
+    .row
+      .col-xs-4
+        .form-group
+          = f.label '年月'
+          = f.text_field :date, class: 'form-control', id: 'datetimepicker4'
+
+        .form-group
+          = f.label "目標(#{@entity})"
+          = f.text_field :goal, class: 'form-control'
+
+        .form-group
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 保存
