@@ -1,18 +1,39 @@
-= form_for(team) do |f|
-  - if team.errors.any?
-    #error_explanation
-      h2
-        = pluralize(team.errors.count, "error")
-        |  prohibited this team from being saved:
-      ul
-        - team.errors.full_messages.each do |message|
-          li
-            = message
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :goal
-    = f.number_field :goal
-  .actions
-    = f.submit
+.container
+  = form_for @team do |f|
+    .row
+      .col-xs-4
+        .form-group
+          = f.label 'チーム名'
+          = f.text_field :name, class: 'form-control'
+
+        .form-group
+          = f.label '当月目標'
+          = f.text_field :goal, class: 'form-control'
+
+        .form-group
+          = f.label '目標種別'
+          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
+
+        .form-group
+          = f.label '発表順'
+          = text_field_tag 'team[order]', @team.order || (Team.maximum(:order) || 0) + 1, class: 'form-control'
+
+        .form-group
+          = button_tag type: "submit", class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 保存
+
+      .col-xs-5.col-xs-offset-1
+        table.table
+          caption 現在の発表順
+          thead
+            tr
+              th #
+              th チーム名
+          tbody
+            - Team.select(:name, :order).all.order(:order).each do |team|
+              tr
+                th
+                  = team.order
+                th
+                  = team.name

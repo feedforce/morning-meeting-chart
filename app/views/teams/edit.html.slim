@@ -5,31 +5,7 @@
 .container
   hr
 
-.container
-  = form_for @team do |f|
-    .row
-      .col-xs-4
-        .form-group
-          = f.label 'チーム名'
-          = f.text_field :name, class: 'form-control'
-
-    .row
-      .col-xs-4
-        .form-group
-          = f.label '月間目標'
-          = f.text_field :goal, class: 'form-control'
-
-    .row
-      .col-xs-4
-        .form-group
-          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
-
-    .row
-      .col-xs-4
-        .form-group
-          = button_tag type: "submit", class: 'btn btn-primary' do
-            span.glyphicon.glyphicon-ok.btn-icon
-            | 保存
+= render partial: 'form'
 
 .container
   = link_to '戻る', teams_path, class: 'btn btn-default'

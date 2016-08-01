@@ -5,32 +5,7 @@
 .container
   hr
 
-.container
-  = form_tag("/teams", method: 'post') do
-    .row
-      .col-xs-4
-        .form-group
-          = label_tag 'チーム名'
-          = text_field_tag 'team[name]', nil, class: 'form-control'
-
-    .row
-      .col-xs-4
-        .form-group
-          = label_tag '当月目標'
-          = text_field_tag 'team[goal]', 0, class: 'form-control'
-
-    .row
-      .col-xs-4
-        .form-group
-          = label_tag '目標種別'
-          = select_tag 'team[entity]', options_for_select({ "受注件数 [件]": "orders", "売上 [円]": "sales" }), class: 'form-control selectpicker'
-
-    .row
-      .col-xs-4
-        .form-group
-          = button_tag type: "submit", class: 'btn btn-primary' do
-            span.glyphicon.glyphicon-ok.btn-icon
-            | 作成
+= render partial: 'form'
 
 .container
   = link_to '戻る', teams_path, class: 'btn btn-default'

@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.all.order(:order)
   end
 
   # GET /teams/1
@@ -63,14 +63,15 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def team_params
-    params.require(:team).permit(:name, :goal, :entity)
+    params.require(:team).permit(:name, :goal, :entity, :order)
   end
 
   def current_time
