@@ -14,16 +14,16 @@ class Team < ApplicationRecord
   end
 
   def goal_formatted
-    if self.orders?
+    if orders?
       ActionController::Base.helpers.number_to_currency(
-        self.goal,
+        goals.last.goal,
         format: "%n%u",
         unit: ' 件',
         precision: 0
       )
     else
       ActionController::Base.helpers.number_to_currency(
-        self.goal,
+        goals.last.goal,
         format: "%n%u",
         unit: ' 円',
         precision: 0

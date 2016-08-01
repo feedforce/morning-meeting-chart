@@ -10,6 +10,7 @@
       tr
         th #
         th.centering チーム名
+        th.centering 今月の目標
         th[colspan="4"]
 
     tbody
@@ -20,6 +21,9 @@
 
           td.centering
             = team.name
+
+          td.centering
+            = team.goal_formatted
 
           td.right-align
             = link_to team_goals_path(team) do
