@@ -30,7 +30,7 @@ class GraphCreator
       f.yAxis [
         {
           title: {
-            text: entity, margin: 70
+            text: entity, margin: 10
           },
           max: max,
           allowDecimals: false,
