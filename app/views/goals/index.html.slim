@@ -12,6 +12,8 @@
           | 年
         th
           | 月
+        th
+          | 今月の目標
         th[colspan="4"]
     tbody
       - @goals.order(:date).each do |goal|
@@ -21,6 +23,9 @@
 
           td
             = "#{goal.date.month}"
+
+          td
+            = goal.goal_formatted
 
           td
             = link_to team_goal_progresses_path(@team, goal) do

@@ -23,7 +23,7 @@
             = team.name
 
           td.centering
-            = team.goal_formatted
+            = team.goals.last.goal_formatted
 
           td.right-align
             = link_to team_goals_path(team) do
