@@ -75,7 +75,7 @@ class TeamsController < ApplicationController
   end
 
   def current_time
-    date = @team.progresses.last.start_date
+    date = @team.goals.last.date
     { year: date.year, month: date.month }
   end
 end

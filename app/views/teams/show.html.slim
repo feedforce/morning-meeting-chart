@@ -8,15 +8,15 @@
 .container-preview
   .row
     .col-xs-6
-      - if @team.progresses.present?
+      - if @team.goals.present?
         = high_chart("chart-#{@team.id}", @graph)
     .col-xs-6
       h2
         span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
         | Topics
-      - if @team.progresses.present?
+      - if @team.goals.present?
         ul.list-group
-        - @team.progresses.latest.topics.each do |topic|
+        - @team.goals.last.progresses.latest.topics.each do |topic|
           - if topic.content.present?
             li.topics
               = topic.content
