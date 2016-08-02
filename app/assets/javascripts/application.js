@@ -21,6 +21,14 @@
 //= require highcharts/modules/exporting
 
 $(function() {
+  $('#datetimepicker').datetimepicker(
+    {
+      format: 'YYYY-MM',
+    }
+  );
+});
+
+$(function() {
   $('#datetimepicker3').datetimepicker(
     {
       format: 'YYYY-MM-DD',
