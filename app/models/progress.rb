@@ -3,6 +3,7 @@ class Progress < ApplicationRecord
 
   belongs_to :team
   has_many :topics, dependent: :destroy
+  belongs_to :goal
 
   validates :start_date, presence: true
   validates :amount, presence: true
