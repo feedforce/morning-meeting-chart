@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :goal do
-    date "2016-07-28"
-    goal 1
-    team nil
+    date Date.new(2016,7,1)
+    goal { rand(10) + 15 }
+    team
   end
 end
