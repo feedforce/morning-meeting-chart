@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :current_time, only: [:show]
+
   # GET /teams
   # GET /teams.json
   def index
@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @graph = GraphCreator.new(@team).create(current_time)
+    @graph = GraphCreator.new(@team).create(current_time) if Progress.current_month_progresses(params[:id]).size > 0
   end
 
   # GET /teams/new
