@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20160728153406) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "goal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "entity",     default: 0
