@@ -1,8 +1,7 @@
 class ProgressesController < ApplicationController
   before_action :set_team, only: [:index, :update, :create]
-  before_action :set_goal, only: [:index]
+  before_action :set_goal, only: [:index, :create, :update]
   before_action :set_progress, only: [:edit, :update, :destroy]
-  before_action :set_last_goal, only: [:update, :create]
 
   def index
     #@graph = @team.graph(graph_params)
@@ -74,7 +73,7 @@ class ProgressesController < ApplicationController
   end
 
   def progress_params
-    params.require(:progress).permit(:amount, :start_date, :end_date).merge(team: Team.find(params[:team_id]), goal: @goal)
+    params.require(:progress).permit(:amount, :start_date, :end_date).merge(goal: @goal)
   end
 
   def topic_params
@@ -87,15 +86,6 @@ class ProgressesController < ApplicationController
       today - (today.wday - 1)
     else
       today - (8 - today.wday)
-    end
-  end
-
-  def set_last_goal
-    last_goal = @team.goals.last
-    if last_goal
-      @goal = last_goal
-    else
-      @goal = Goal.create(date: Date.new(2016, 7, 1, 0), goal: @team.goal, team_id: @team.id)
     end
   end
 end
