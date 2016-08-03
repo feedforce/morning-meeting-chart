@@ -1,9 +1,7 @@
 class Team < ApplicationRecord
-  has_many :progresses, dependent: :destroy
-  has_many :goals
+  has_many :goals, dependent: :destroy
 
   validates :name, presence: true
-  validates :goal, presence: true
   validates :order, presence: true, uniqueness: true
 
   enum entity: { orders: 0, sales: 1 }
@@ -13,24 +11,6 @@ class Team < ApplicationRecord
 
   def graph(time)
     @graph = GraphCreator.new(self).create(time)
-  end
-
-  def goal_formatted
-    if self.orders?
-      ActionController::Base.helpers.number_to_currency(
-        self.goal,
-        format: "%n%u",
-        unit: ' 件',
-        precision: 0
-      )
-    else
-      ActionController::Base.helpers.number_to_currency(
-        self.goal,
-        format: "%n%u",
-        unit: ' 円',
-        precision: 0
-      )
-    end
   end
 
   def self.has_prev_team?(order)

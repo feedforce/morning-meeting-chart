@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20160728153406) do
   end
 
   create_table "progresses", force: :cascade do |t|
-    t.integer  "team_id"
     t.date     "start_date"
     t.integer  "amount"
     t.datetime "created_at", null: false
@@ -30,12 +29,10 @@ ActiveRecord::Schema.define(version: 20160728153406) do
     t.date     "end_date"
     t.integer  "goal_id"
     t.index ["goal_id"], name: "index_progresses_on_goal_id"
-    t.index ["team_id"], name: "index_progresses_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.integer  "goal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "entity",     default: 0

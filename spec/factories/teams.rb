@@ -5,6 +5,5 @@ FactoryGirl.define do
     sequence(:name) { |i| "チーム#{i}" }
     sequence(:order) { |i| "#{i}" }
     entity 0
-    goal { rand(10) + 15 }
   end
 end

@@ -5,7 +5,7 @@ class GraphCreator
 
   def create(time)
     set_progresses(time)
-    return LazyHighCharts::HighChart.new('graph') if @team.progresses.empty?
+    return LazyHighCharts::HighChart.new('graph') if @team.goals.empty?
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)
@@ -36,11 +36,11 @@ class GraphCreator
           allowDecimals: false,
           plotLines: [
             {
-              value: @team.goal,
+              value: @goal,
               color: '#FF0000',
               width: 2,
               label: {
-                text: "目標 = #{@team.goal}",
+                text: "目標 = #{@goal}",
                 align: 'left',
                 x: 0,
                 y: -10
@@ -59,9 +59,13 @@ class GraphCreator
   def set_progresses(time)
     @time = time
     @progresses = []
-    @team.progresses.order('start_date asc').each do |progress|
-      if progress.start_date.year == @time[:year] && progress.start_date.month == @time[:month]
-        @progresses << progress
+    @goal = 0
+    @team.goals.each do |goal|
+      if goal.date.year == @time[:year] && goal.date.month == @time[:month]
+        goal.progresses.order('start_date asc').each do |progress|
+          @progresses << progress
+        end
+        @goal += goal.goal
       end
     end
   end
@@ -107,8 +111,8 @@ class GraphCreator
   end
 
   def max
-    if @team.goal > series_data.sum
-      @team.goal + 10
+    if @goal > series_data.sum
+      @goal + 10
     else
       series_data.sum + 10
     end

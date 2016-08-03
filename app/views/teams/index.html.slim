@@ -10,7 +10,7 @@
       tr
         th #
         th.centering チーム名
-        th.goal 月間目標
+        th.centering 今月の目標
         th[colspan="4"]
 
     tbody
@@ -22,20 +22,20 @@
           td.centering
             = team.name
 
-          td.goal
-            = team.goal_formatted
+          td.centering
+            = team.goals.last&.goal_formatted
 
           td.right-align
-            = link_to team_progresses_path(team) do
-              button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon
-                | 実績管理
+            = link_to team_goals_path(team) do
+              button.btn.btn-info
+                span.glyphicon.glyphicon-th-list.btn-icon
+                | 目標一覧
 
           td.right-align
             = link_to edit_team_path(team) do
               button.btn.btn-success
                 span.glyphicon.glyphicon-wrench.btn-icon
-                | 月間目標編集
+                | チーム編集
 
           td.right-align
             = link_to team do
