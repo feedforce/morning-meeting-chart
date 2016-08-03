@@ -7,9 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 team = FactoryGirl.create(:team)
-date = Date.new(2016,7,1)
+goal = FactoryGirl.create(:goal, team: team, date: Date.new(2016,7,1))
+start_date = Date.new(2016,7,4)
 4.times do
-  pr = FactoryGirl.create(:progress, team: team, start_date: date)
+  end_date = start_date + 4.days
+  pr = FactoryGirl.create(:progress, team: team, goal: goal, start_date: start_date, end_date: end_date)
   FactoryGirl.create(:topic, progress: pr)
-  date += 1.weeks
+  start_date += 1.weeks
 end
