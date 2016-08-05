@@ -1,0 +1,25 @@
+h1 Listing infos
+
+table
+  thead
+    tr
+      th Title
+      th Owner
+      th Announce date
+      th
+      th
+      th
+
+  tbody
+    - @infos.each do |info|
+      tr
+        td = info.title
+        td = info.owner
+        td = info.announce_date
+        td = link_to 'Show', info
+        td = link_to 'Edit', edit_info_path(info)
+        td = link_to 'Destroy', info, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Info', new_info_path
