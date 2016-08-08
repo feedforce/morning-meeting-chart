@@ -18,29 +18,7 @@ module Graph
           enabled: true
         }
       )
-      f.yAxis [
-        {
-          title: {
-            text: entity,
-            margin: 10
-          },
-          max: max,
-          allowDecimals: false,
-          plotLines: [
-            {
-              value: goal,
-              color: '#FF0000',
-              width: 2,
-              label: {
-                text: "目標 = #{goal}",
-                aligin: 'left',
-                x: 0,
-                y: -10
-              }
-            }
-          ]
-        }
-      ]
+      f.yAxis [y_axis]
     end
   end
 
@@ -81,6 +59,30 @@ module Graph
     @series.map do |s|
       sum += s
     end
+  end
+
+  def self.y_axis
+    {
+      title: {
+        text: entity,
+        margin: 10
+      },
+      max: max,
+      allowDecimals: false,
+      plotLines: [
+        {
+          value: goal,
+          color: '#FF0000',
+          width: 2,
+          label: {
+            text: "目標 = #{goal}",
+            aligin: 'left',
+            x: 0,
+            y: -10
+          }
+        }
+      ]
+    }
   end
 
   def self.goal
