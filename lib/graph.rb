@@ -5,7 +5,7 @@ module Graph
     return LazyHighCharts::HighChart.new('graph') unless goals
 
     # NOTE: 目標が１つの時は配列の１要素に変換する
-    goals = [goals] if goals.instance_of?(Goal)
+    goals = [goals] unless goals.is_a?(Array)
     init(goals)
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)

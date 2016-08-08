@@ -9,6 +9,8 @@
     thead
       tr
         th.centering
+          |
+        th.centering
           | 年
         th.centering
           | 月
@@ -16,8 +18,11 @@
           | 今月の目標
         th[colspan="4"]
     tbody
+      -
       - @goals.order(:date).each do |goal|
         tr
+          td.centering
+
           td.centering
             = "#{goal.date.year}"
 
@@ -52,6 +57,11 @@
       | 目標の新規登録
 
 hr
+- if @graph
+  .container.container-graph
+    h3 グラフプレビュー
+    = high_chart("some_id", @graph)
+
 
 .container
   = link_to 'チーム一覧へ', teams_path, class: 'btn btn-default'

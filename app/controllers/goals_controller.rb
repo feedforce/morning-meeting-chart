@@ -5,6 +5,7 @@ class GoalsController < ApplicationController
 
   def index
     @goals = @team.goals
+    @graph = Graph.create(graph_params) unless @goals.order(:date).last.progresses.empty?
   end
 
   def edit
@@ -65,5 +66,10 @@ class GoalsController < ApplicationController
     param = params.require(:goal).permit(:date, :goal)
     param[:date] += '-01' if param[:date]
     param
+  end
+
+  def graph_params
+    #params.require(:graph).permit(:data)
+    @goals.order(:date).last
   end
 end
