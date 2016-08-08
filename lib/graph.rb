@@ -1,5 +1,4 @@
 module Graph
-
   attr_accessor :team, :goals
 
   def self.create(goals)
