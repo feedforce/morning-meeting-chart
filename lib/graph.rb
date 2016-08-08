@@ -18,6 +18,29 @@ module Graph
           enabled: true
         }
       )
+      f.yAxis [
+        {
+          title: {
+            text: entity,
+            margin: 10
+          },
+          max: max,
+          allowDecimals: false,
+          plotLines: [
+            {
+              value: goal,
+              color: '#FF0000',
+              width: 2,
+              label: {
+                text: "目標 = #{goal}",
+                aligin: 'left',
+                x: 0,
+                y: -10
+              }
+            }
+          ]
+        }
+      ]
     end
   end
 
@@ -58,5 +81,24 @@ module Graph
     @series.map do |s|
       sum += s
     end
+  end
+
+  def self.goal
+    @goals.map(&:goal).inject(:+)
+  end
+
+  def self.max
+    upper = @team.orders? ? 10 : 100_000_00
+    max = @series.inject(:+)
+    if goal > max
+      goal + upper
+    else
+      max + upper
+    end
+  end
+
+  def self.entity
+    return '受注件数' if @team.orders?
+    return '売上(円)' if @team.sales?
   end
 end
