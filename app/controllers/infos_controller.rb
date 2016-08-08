@@ -69,6 +69,6 @@ class InfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def info_params
-      params.require(:info).permit(:title, :owner, :announce_date)
+      params.require(:info).permit(:title, :body, :owner, :announce_date)
     end
 end
