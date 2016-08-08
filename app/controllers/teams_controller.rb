@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @graph = GraphCreator.new(@team).create(current_time)
+    @graph = Graph.create(@team.goals.last)
   end
 
   # GET /teams/new
