@@ -38,7 +38,7 @@ module Graph
 
   def self.set_series
     progresses = @goals.flat_map(&:progresses).sort_by!(&:start_date)
-    @series = progresses.map(&:amount)
+    @series = progresses.map(&:amount).reverse
   end
 
   def self.title
@@ -64,7 +64,7 @@ module Graph
 
   def self.stacked_data_line
     sum = 0
-    @series.map do |s|
+    @series.reverse.map do |s|
       sum += s
     end
   end
