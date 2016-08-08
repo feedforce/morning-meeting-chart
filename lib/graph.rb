@@ -10,6 +10,14 @@ module Graph
     LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: title)
       f.xAxis(categories: categories)
+      @series.each_with_index do |amount, n|
+        f.series(
+          type: 'column',
+          name: categories.reverse[n],
+          stacking: 'normal',
+          data: stacked_data_column(amount, n)
+        )
+      end
       f.series(
         type: 'line',
         name: '合計値',
@@ -59,6 +67,13 @@ module Graph
     @series.map do |s|
       sum += s
     end
+  end
+
+  def self.stacked_data_column(amount, n)
+    tmp = []
+    (@series.size - 1 - n).times { tmp.push(0) }
+    (n + 1).times { tmp.push(amount) }
+    tmp
   end
 
   def self.y_axis
