@@ -5,7 +5,7 @@ module Graph
     return LazyHighCharts::HighChart.new('graph') unless goals
 
     # NOTE: 目標が１つの時は配列の１要素に変換する
-    if goals.is_a?(Array)
+    if goals.size > 1
       multi_goals(goals)
     else
       single_goals(goals)
@@ -39,15 +39,19 @@ module Graph
   def self.single_goals(goals)
     @team = goals.team
     @goals = goals
-    @title = "#{@team.name} : #{@goals.date.year}年#{@goals.date.month}月"
+    @title = "#{@team.name} : #{@goals.date.strftime("%Y年 %m月")}"
     @categories = single_categories
     @series = single_series
     @goal = goals.goal
   end
 
   def self.multi_goals(goals)
+    @team = goals.first.team
+    @goals = goals
+    @title = "#{@team.name} : #{@goals.first.date.strftime("%Y年 %m月")} ~  #{@goals.last.date.strftime("%Y年 %m月")}"
     @categories = multi_categories
-    @series = multi_series
+    multi_series
+    @goal = @goals.map(&:goal).inject(:+)
   end
 
   def self.single_series
@@ -55,14 +59,23 @@ module Graph
     progresses.map(&:amount).reverse
   end
 
-  def self.single_categories
-    @goals.progresses.map do |progress|
-      category_day(progress)
+  def self.multi_series
+    @series = []
+    @goals.map(&:progresses).reverse.each do |progresses|
+      @series << progresses.map(&:amount).inject(:+)
     end
   end
 
-  def self.category_day(progress)
-    "#{progress.start_date.day}〜#{(progress.end_date).day}日"
+  def self.single_categories
+    @goals.progresses.map do |progress|
+      "#{progress.start_date.day}〜#{(progress.end_date).day}日"
+    end
+  end
+
+  def self.multi_categories
+    @goals.map do |goal|
+      goal.date.strftime("%Y年 %m月")
+    end
   end
 
   def self.stacked_data_line
@@ -101,10 +114,6 @@ module Graph
         }
       ]
     }
-  end
-
-  def self.goal
-    @goals.map(&:goal).inject(:+)
   end
 
   def self.max
