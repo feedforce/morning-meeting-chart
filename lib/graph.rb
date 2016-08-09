@@ -5,15 +5,19 @@ module Graph
     return LazyHighCharts::HighChart.new('graph') unless goals
 
     # NOTE: 目標が１つの時は配列の１要素に変換する
-    goals = [goals] unless goals.is_a?(Array)
-    init(goals)
+    if goals.is_a?(Array)
+      multi_goals(goals)
+    else
+      single_goals(goals)
+    end
+
     LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: title)
-      f.xAxis(categories: categories)
+      f.title(text: @title)
+      f.xAxis(categories: @categories)
       @series.each_with_index do |amount, n|
         f.series(
           type: 'column',
-          name: categories.reverse[n],
+          name: @categories.reverse[n],
           stacking: 'normal',
           data: stacked_data_column(amount, n)
         )
@@ -32,31 +36,28 @@ module Graph
     end
   end
 
-  def self.init(goals)
-    @team = goals.first.team
+  def self.single_goals(goals)
+    @team = goals.team
     @goals = goals
-    set_series
+    @title = "#{@team.name} : #{@goals.date.year}年#{@goals.date.month}月"
+    @categories = single_categories
+    @series = single_series
+    @goal = goals.goal
   end
 
-  def self.set_series
-    progresses = @goals.flat_map(&:progresses).sort_by!(&:start_date)
-    @series = progresses.map(&:amount).reverse
+  def self.multi_goals(goals)
+    @categories = multi_categories
+    @series = multi_series
   end
 
-  def self.title
-    title = "#{@team.name} : #{@goals.first.date.year} 年 #{@goals.first.date.month} 月"
-    if @goals.size < 2
-      "#{title}度"
-    else
-      "#{title} 〜 #{@goals.last.date.year} 年 #{@goals.last.date.month} 月度"
-    end
+  def self.single_series
+    progresses = @goals.progresses.to_a.sort_by!(&:start_date)
+    progresses.map(&:amount).reverse
   end
 
-  def self.categories
-    @goals.flat_map do |goal|
-      goal.progresses.map do |progress|
-        category_day(progress)
-      end
+  def self.single_categories
+    @goals.progresses.map do |progress|
+      category_day(progress)
     end
   end
 
@@ -88,11 +89,11 @@ module Graph
       allowDecimals: false,
       plotLines: [
         {
-          value: goal,
+          value: @goal,
           color: '#FF0000',
           width: 2,
           label: {
-            text: "目標 = #{goal}",
+            text: "目標 = #{@goal}",
             aligin: 'left',
             x: 0,
             y: -10
@@ -109,8 +110,8 @@ module Graph
   def self.max
     upper = @team.orders? ? 10 : 100_000_00
     max = @series.inject(:+)
-    if goal > max
-      goal + upper
+    if @goal > max
+      @goal + upper
     else
       max + upper
     end
