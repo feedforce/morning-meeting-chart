@@ -1,0 +1,27 @@
+.container
+  = form_for @info do |f|
+    - if @info.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@info.errors.count, "error")} prohibited this info from being saved:"
+        ul
+          - @info.errors.full_messages.each do |message|
+            li = message
+
+    .row
+      .col-xs-4
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
+
+        .form-group
+          = f.label :owner
+          = f.text_field :owner, class: 'form-control'
+
+        .form-group
+          = f.label :announce_date
+          = f.date_select :announce_date, class: 'form-control'
+
+        .form-group
+          = button_tag type: 'submit', class: 'btn btn-primary' do
+            span.glyphicon.glyphicon-ok.btn-icon
+            | 保存

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @info.title
+p
+  strong Owner:
+  = @info.owner
+p
+  strong Announce date:
+  = @info.announce_date
+
+= link_to 'Edit', edit_info_path(@info)
+'|
+= link_to 'Back', infos_path
