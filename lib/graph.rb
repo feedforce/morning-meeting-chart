@@ -5,10 +5,10 @@ module Graph
     return LazyHighCharts::HighChart.new('graph') unless goals
 
     # NOTE: 目標が１つの時は配列の１要素に変換する
-    if goals.size > 1
-      multi_goals(goals)
-    else
+    if goals.is_a? Goal
       single_goals(goals)
+    else
+      multi_goals(goals)
     end
 
     LazyHighCharts::HighChart.new('graph') do |f|

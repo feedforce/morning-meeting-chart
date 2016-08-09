@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
 
   def index
     @goals = @team.goals
-    @graph = Graph.create(graph_params) unless @goals.order(:date).last.progresses.empty?
+    @graph = Graph.create(@goals.find(graph_params))
   end
 
   def edit
@@ -69,7 +69,16 @@ class GoalsController < ApplicationController
   end
 
   def graph_params
-    #params.require(:graph).permit(:data)
-    @goals.order(:date).last
+    if params.has_key?(:graph)
+      params.require(:graph).map(&:to_i)
+    else
+      # NOTE: 一時的？にパラメータが与えられなかった場合は、今までのデータの中で
+      #       Progresses を登録してあるものを使ったグラフを作成する
+      graph = []
+      @goals.each do |goal|
+        graph << goal.id unless goal.progresses.empty?
+      end
+      graph
+    end
   end
 end
