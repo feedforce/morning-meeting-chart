@@ -24,7 +24,7 @@ class QiitaExporter
 
   def title
     now = Time.current.in_time_zone('Asia/Tokyo')
-    %(#{now.year}/#{now.month}/#{now.day} 朝会まとめ)
+    %(#{now.year}/#{now.month}/#{now.day} 月曜全体朝会まとめ)
   end
 
   def tags
