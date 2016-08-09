@@ -27,11 +27,31 @@ class QiitaExporter
     %(#{now.year}/#{now.month}/#{now.day} 月曜全体朝会まとめ)
   end
 
-  def tags
-    {}
+  def body
+    body = ""
+    Team.all.each do |team|
+      body += "## #{team.name} <br> "
+      body += "### #{progress(team)} <br>"
+      body += "<TODO: ここにグラフを出力して貼ってね> <br> "
+      topics = Topic.where(progress_id: team.goals.last.progresses.last.id)
+      if topics.present?
+        body += "### 先週のトピック <br> "
+        topics.each do |topic|
+          body += "+ #{topic.content} <br> "
+        end
+      end
+    end
+    body
   end
 
-  def body
+  def progress(team)
+    goal = team.goals.last
+    sum = goal.progresses.sum(:amount)
+    "今月の達成度 : #{sum}/#{goal.goal} #{entity(team)} (#{((sum.to_f/goal.goal.to_f) * 100).to_i}%)"
+  end
 
+  def entity(team)
+    return '(件)' if team.orders?
+    return '(円)' if team.sales?
   end
 end
