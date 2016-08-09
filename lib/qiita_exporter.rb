@@ -8,12 +8,18 @@ class QiitaExporter
   end
 
   private
+
   def client
     @client ||= Qiita::Client.new(access_token: ENV['QIITA_ACCESS_TOKEN'])
   end
 
   def params
-    { title: title, tags: tags, body: body }
+    {
+      title: title,
+      tags: '月曜全体朝会',
+      body: body,
+      coediting: true
+    }
   end
 
   def title
