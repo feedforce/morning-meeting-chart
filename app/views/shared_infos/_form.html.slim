@@ -1,0 +1,21 @@
+= form_for @shared_info do |f|
+  - if @shared_info.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@shared_info.errors.count, "error")} prohibited this shared_info from being saved:"
+      ul
+        - @shared_info.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :owner
+    = f.text_field :owner
+  .field
+    = f.label :body
+    = f.text_field :body
+  .field
+    = f.label :announce_date
+    = f.date_select :announce_date
+  .actions = f.submit

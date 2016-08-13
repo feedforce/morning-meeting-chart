@@ -1,0 +1,2 @@
+class SharedInfo < ApplicationRecord
+end

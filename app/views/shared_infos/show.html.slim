@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @shared_info.title
+p
+  strong Owner:
+  = @shared_info.owner
+p
+  strong Body:
+  = @shared_info.body
+p
+  strong Announce date:
+  = @shared_info.announce_date
+
+= link_to 'Edit', edit_shared_info_path(@shared_info)
+'|
+= link_to 'Back', shared_infos_path
