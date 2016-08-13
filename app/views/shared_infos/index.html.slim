@@ -1,27 +1,30 @@
-h1 Listing shared_infos
+.container
+  h1 全体共有事項一覧
 
-table
-  thead
-    tr
-      th Title
-      th Owner
-      th Body
-      th Announce date
-      th
-      th
-      th
+.container
+  hr
 
-  tbody
-    - @shared_infos.each do |shared_info|
+.container
+  table.table
+    thead
       tr
-        td = shared_info.title
-        td = shared_info.owner
-        td = shared_info.body
-        td = shared_info.announce_date
-        td = link_to 'Show', shared_info
-        td = link_to 'Edit', edit_shared_info_path(shared_info)
-        td = link_to 'Destroy', shared_info, data: { confirm: 'Are you sure?' }, method: :delete
+        th Title
+        th Owner
+        th Announce date
+        th[colspan="3"]
 
-br
+    tbody
+      - @shared_infos.each do |shared_info|
+        tr
+          td = shared_info.title
+          td = shared_info.owner
+          td = shared_info.announce_date
+          td = link_to 'Show', shared_info
+          td = link_to 'Edit', edit_shared_info_path(shared_info)
+          td = link_to 'Destroy', shared_info, data: { confirm: 'Are you sure?' }, method: :delete
 
-= link_to 'New Shared info', new_shared_info_path
+.container
+  hr
+
+.container
+  = link_to 'New Info', new_shared_info_path
