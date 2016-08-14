@@ -39,13 +39,12 @@
   hr
 
 .container
-  .row
-    .col-xs-2 = link_to new_shared_info_path do
+  p = link_to new_shared_info_path do
       button.btn.btn-primary
         span.glyphicon.glyphicon-plus.btn-icon
         | 新規作成
 
-    .col-xs-2 = link_to teams_path do
-      button.btn.btn-primary
+  p = link_to teams_path do
+      button.btn.btn-info
         span.glyphicon.glyphicon-th-list.btn-icon
         | チーム一覧
