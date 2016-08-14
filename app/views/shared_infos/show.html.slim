@@ -1,13 +1,11 @@
-p#notice = notice
+.container
+  h1
+    = @shared_info.title
 
-p
-  strong Title:
-  = @shared_info.title
-p
-  strong Owner:
-  = @shared_info.owner
-p
-  strong Body:
+.container-preview
+  hr
+
+.container-preview
   = @shared_info.body
 p
   strong Announce date:
