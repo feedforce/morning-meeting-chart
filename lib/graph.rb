@@ -2,7 +2,7 @@ module Graph
   attr_accessor :team, :goals, :series
   class << self
     def create(goals)
-      return LazyHighCharts::HighChart.new('graph') unless goals
+      return LazyHighCharts::HighChart.new('graph') if goals.empty?
 
       # NOTE: 目標が１つの時は配列の１要素に変換する
       if goals.is_a? Goal
