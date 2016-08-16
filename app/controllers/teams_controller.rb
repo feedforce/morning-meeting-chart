@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :current_time, only: [:show]
+
   # GET /teams
   # GET /teams.json
   def index
@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @graph = Graph.create(@team.goals.last)
+      @graph = Graph.create(@team.goals.last)
   end
 
   # GET /teams/new
@@ -74,8 +75,7 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :goal, :entity, :order)
   end
 
-  def current_time
-    date = @team.goals.last.date
-    { year: date.year, month: date.month }
+  def can_create_graph?
+    @team.goals.present? && @team.goals.last.progresses.present?
   end
 end
