@@ -10,8 +10,11 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    @graph = Graph.create(@team.goals.last)
+    if can_create_graph?
       @graph = Graph.create(@team.goals.last)
+    else
+      redirect_to teams_path, alert: '目標や進捗を登録してからグラフを作成してください。'
+    end
   end
 
   # GET /teams/new
