@@ -22,7 +22,7 @@
         - @goals.order(:date).each do |goal|
           tr
             td.centering
-              = check_box_tag 'graph[]', goal.id.to_i
+              = check_box_tag('graph[]', goal.id.to_i) unless goal.progresses.empty?
 
             td.centering
               = "#{goal.date.year}"
