@@ -4,7 +4,7 @@
   h3
     = "#{@team.name} チーム "
 
-=form_tag("/teams/#{@team.id}/goals", method: 'get') do |f|
+=form_tag("/teams/#{@team.id}/goals", method: 'get', enforce_utf8: false, name: nil) do |f|
   .container.container-table
     table.table.table-striped
       thead
@@ -35,19 +35,19 @@
 
             td
               = link_to team_goal_progresses_path(@team, goal) do
-                button.btn.btn-info
+                button_tag.btn.btn-info
                   span.glyphicon.glyphicon-th-list.btn-icon
                   | 進捗一覧
 
             td
               = link_to edit_team_goal_path(@team, goal), action: :edit do
-                button.btn.btn-success
+                button_tag.btn.btn-success
                   span.glyphicon.glyphicon-wrench.btn-icon
                   | 目標編集
 
             td
               = link_to team_goal_path(@team, goal), method: :delete, data: { confirm: '削除してよろしいですか？' } do
-                button.btn.btn-danger
+                button_tag.btn.btn-danger
                   span.glyphicon.glyphicon-trash.btn-icon
                   | 削除
   .container
