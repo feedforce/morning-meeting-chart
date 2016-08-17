@@ -5,6 +5,7 @@ class GoalsController < ApplicationController
 
   def index
     @goals = @team.goals
+    @goals.sort_by { |goal| goal.date }
     @graph = Graph.create(@goals.find(graph_params))
   end
 
