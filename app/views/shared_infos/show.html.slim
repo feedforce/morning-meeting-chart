@@ -2,15 +2,29 @@
   h1
     = @shared_info.title
 
-.container-preview
+.container
   hr
 
-.container-preview
+.container
   = @shared_info.body
-p
-  strong Announce date:
-  = @shared_info.announce_date
 
-= link_to 'Edit', edit_shared_info_path(@shared_info)
-'|
-= link_to 'Back', shared_infos_path
+.container
+  hr
+
+.container
+  ul.pager
+    - if SharedInfo.has_prev_info?(@shared_info.announce_date, @shared_info.id)
+      li.previous
+        - prev_info = SharedInfo.prev_info(@shared_info.announce_date, @shared_info.id)
+        = link_to(shared_info_path(prev_info.id)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          = prev_info.title
+
+    - if SharedInfo.has_next_info?(@shared_info.announce_date, @shared_info.id)
+      li.next
+        - next_info = SharedInfo.next_info(@shared_info.announce_date, @shared_info.id)
+        = link_to(shared_info_path(next_info.id)) do
+          = next_info.title
+          span aria-hidden="true"
+            | &nbsp;&rarr;
