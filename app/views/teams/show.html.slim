@@ -14,9 +14,9 @@
       h2
         span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
         | Topics
-      - if @team.goals.present?
+      - if @goals.present?
         ul.list-group
-        - @team.goals.last.progresses.latest.topics.each do |topic|
+        - @goals.last.progresses.latest.topics.each do |topic|
           - if topic.content.present?
             li.topics
               = topic.content

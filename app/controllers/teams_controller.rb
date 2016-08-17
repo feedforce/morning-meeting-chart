@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     if can_create_graph?
-      @graph = Graph.create(@team.goals.last)
+      @graph = Graph.create(@goals.last)
     else
       redirect_to teams_path, alert: '目標や進捗を登録してからグラフを作成してください。'
     end
@@ -71,6 +71,7 @@ class TeamsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
+    @goals = @team.goals.order(:date)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -79,6 +80,6 @@ class TeamsController < ApplicationController
   end
 
   def can_create_graph?
-    @team.goals.present? && @team.goals.last.progresses.present?
+    @goals.present? && @goals.last.progresses.present?
   end
 end

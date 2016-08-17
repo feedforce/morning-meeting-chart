@@ -19,7 +19,7 @@
             | 今月の目標
           th[colspan="4"]
       tbody
-        - @goals.order(:date).each do |goal|
+        - @goals.each do |goal|
           tr
             td.centering
               = check_box_tag('graph[]', goal.id.to_i) unless goal.progresses.empty?

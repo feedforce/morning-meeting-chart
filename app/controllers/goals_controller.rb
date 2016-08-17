@@ -4,8 +4,7 @@ class GoalsController < ApplicationController
   before_action :set_entity, only: [:new, :edit]
 
   def index
-    @goals = @team.goals
-    @goals.sort_by { |goal| goal.date }
+    @goals = @team.goals.order(:date)
     @graph = Graph.create(@goals.find(graph_params))
   end
 
