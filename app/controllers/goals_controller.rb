@@ -55,7 +55,7 @@ class GoalsController < ApplicationController
   end
 
   def set_entity
-    if @team.order?
+    if @team.orders?
       @entity = '件'
     else
       @entity = '円'
