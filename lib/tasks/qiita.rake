@@ -1,0 +1,2 @@
+namespace :qiita do
+end
