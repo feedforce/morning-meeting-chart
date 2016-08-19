@@ -4,7 +4,6 @@ class ProgressesController < ApplicationController
   before_action :set_progress, only: [:edit, :update, :destroy]
 
   def index
-    #@graph = @team.graph(graph_params)
     @progresses = @team.goals.find(params[:goal_id]).progresses.order('start_date asc')
   end
 
