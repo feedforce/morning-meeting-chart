@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Slim template engine
 gem 'slim-rails'
 
+gem 'rails_autolink'
+
 # Use datetimepicker-rails for pick a date in forms
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
