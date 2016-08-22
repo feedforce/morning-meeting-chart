@@ -22,6 +22,12 @@ gem 'coffee-rails', '~> 4.2'
 ## Graph
 gem 'lazy_high_charts'
 
+## Create SVG images
+gem 'gtk3'
+gem 'mini_magick'
+gem 'rsvg2'
+gem 'phantomjs'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
