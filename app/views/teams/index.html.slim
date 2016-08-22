@@ -31,6 +31,19 @@
                 span.glyphicon.glyphicon-th-list.btn-icon
                 | 目標一覧
 
+          - if team.goals.present?
+            td.right-align
+              = link_to new_team_goal_progress_path(team, team.goals.order(:date).last)
+                button.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 最新月に進捗追加
+          - else
+            td.right-align
+              = link_to new_team_goal_path(team)
+                button.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 目標の新規登録
+
           td.right-align
             = link_to edit_team_path(team) do
               button.btn.btn-success
