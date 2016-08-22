@@ -41,3 +41,10 @@
           = next_team.name
           span aria-hidden="true"
             | &nbsp;&rarr;
+    - elsif SharedInfo.exists?(announce_date: Date.today)
+      li.next
+        - shared_info = SharedInfo.where(announce_date: Date.today).order(:id).first
+        = link_to(shared_info_path(shared_info.id)) do
+          = shared_info.title
+          span aria-hidden="true"
+            | &nbsp;&rarr;
