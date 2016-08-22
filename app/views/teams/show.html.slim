@@ -19,7 +19,7 @@
         - @team.goals.last.progresses.latest.topics.each do |topic|
           - if topic.content.present?
             li.topics
-              = topic.content
+              = auto_link(topic.content)
 
 .container-preview
   hr
