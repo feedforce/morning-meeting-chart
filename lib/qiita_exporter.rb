@@ -26,7 +26,7 @@ class QiitaExporter
 
   def tags
     [
-      { name: '朝会まとめ', versions: [] }
+      { name: '全体朝会', versions: [] }
     ]
   end
 
