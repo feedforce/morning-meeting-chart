@@ -20,6 +20,14 @@
           span aria-hidden="true"
             | &larr;&nbsp;
           = prev_info.title
+    - else
+      li.previous
+        - last_team = Team.order(:order).last
+        = link_to(team_path(last_team.id)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          = last_team.name
+
 
     - if SharedInfo.has_next_info?(@shared_info.announce_date, @shared_info.id)
       li.next
