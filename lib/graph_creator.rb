@@ -51,6 +51,7 @@ class GraphCreator
       ]
       f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
       f.chart({ height: 500 })
+      f.plotOptions(series: { animation: false })
     end
   end
 
