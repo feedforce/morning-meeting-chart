@@ -35,7 +35,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Slim template engine
 gem 'slim-rails'
 
+# Use rails_autolink to create a tag in views
 gem 'rails_autolink'
+# Use redcarpet to parse markdown text
+gem 'redcarpet'
 
 # Use datetimepicker-rails for pick a date in forms
 gem 'momentjs-rails'

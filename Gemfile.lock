@@ -165,6 +165,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redcarpet (3.3.4)
     rspec-core (3.5.0)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -261,6 +262,7 @@ DEPENDENCIES
   rails (~> 5.0.0)
   rails-controller-testing
   rails_autolink
+  redcarpet
   rspec-core
   rspec-expectations
   rspec-mocks
