@@ -1,12 +1,16 @@
 .container
   h1
     = @shared_info.title
+  h4
+    | by:
+    = " #{@shared_info.owner}"
 
 .container
   hr
 
 .container
-  = markdown(@shared_info.body)
+  .shared-info-body
+    = markdown(@shared_info.body)
 
 .container
   hr
