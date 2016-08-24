@@ -3,18 +3,23 @@ class SharedInfo < ApplicationRecord
   validates :body, presence: true
   validates :announce_date, presence: true
 
-  scope :prev_info, -> (announce_date, id) {
-    where('"announce_date" = ? AND "id" < ?', announce_date, id).order(:id).last
-  }
-  scope :next_info, -> (announce_date, id) {
-    where('"announce_date" = ? AND "id" > ?', announce_date, id).order(:id).first
+  scope :this_period, -> {
+    where('? < announce_date AND announce_date <= ?', Date.today - 7, Date.today)
   }
 
-  def self.has_prev_info?(announce_date, id)
-    exists?(['"announce_date" = ? AND "id" < ?', announce_date, id])
+  scope :prev_id, -> (id) {
+    where('id < ?', id).order(:id).last
+  }
+
+  scope :next_id, -> (id) {
+    where('id > ?', id).order(:id).first
+  }
+
+  def self.has_prev_info?(id)
+    exists?(['? < announce_date AND announce_date <= ? AND "id" < ?', Date.today - 7, Date.today, id])
   end
 
-  def self.has_next_info?(announce_date, id)
-    exists?(['"announce_date" = ? AND "id" > ?', announce_date, id])
+  def self.has_next_info?(id)
+    exists?(['? < announce_date AND announce_date <= ? AND "id" > ?', Date.today - 7, Date.today, id])
   end
 end
