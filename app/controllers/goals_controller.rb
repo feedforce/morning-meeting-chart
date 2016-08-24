@@ -4,7 +4,8 @@ class GoalsController < ApplicationController
   before_action :set_entity, only: [:new, :edit]
 
   def index
-    @goals = @team.goals
+    @goals = @team.goals.order(:date)
+    @graph = Graph.create(@goals.find(graph_params))
   end
 
   def edit
@@ -54,7 +55,7 @@ class GoalsController < ApplicationController
   end
 
   def set_entity
-    if @team.order?
+    if @team.orders?
       @entity = '件'
     else
       @entity = '円'
@@ -65,5 +66,19 @@ class GoalsController < ApplicationController
     param = params.require(:goal).permit(:date, :goal)
     param[:date] += '-01' if param[:date]
     param
+  end
+
+  def graph_params
+    if params.has_key?(:graph)
+      params.require(:graph).map(&:to_i)
+    else
+      # NOTE: 一時的？にパラメータが与えられなかった場合は、今までのデータの中で
+      #       Progresses を登録してあるものを使ったグラフを作成する
+      graph = []
+      @goals.each do |goal|
+        graph << goal.id unless goal.progresses.empty?
+      end
+      graph
+    end
   end
 end
