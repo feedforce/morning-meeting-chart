@@ -10,7 +10,6 @@
       tr
         th タイトル
         th 発表者
-        / th 発表日
         th[colspan="3"]
 
     tbody
@@ -18,7 +17,6 @@
         tr
           td = shared_info.title
           td = shared_info.owner
-          / td = shared_info.announce_date
 
           td = link_to edit_shared_info_path(shared_info) do
             button.btn.btn-success
