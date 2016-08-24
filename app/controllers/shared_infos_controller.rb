@@ -28,7 +28,7 @@ class SharedInfosController < ApplicationController
 
     respond_to do |format|
       if @shared_info.save
-        format.html { redirect_to @shared_info, notice: 'Shared info was successfully created.' }
+        format.html { redirect_to @shared_info, notice: '追加されました。' }
         format.json { render :show, status: :created, location: @shared_info }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SharedInfosController < ApplicationController
   def update
     respond_to do |format|
       if @shared_info.update(shared_info_params)
-        format.html { redirect_to @shared_info, notice: 'Shared info was successfully updated.' }
+        format.html { redirect_to @shared_info, notice: '変更されました。' }
         format.json { render :show, status: :ok, location: @shared_info }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SharedInfosController < ApplicationController
   def destroy
     @shared_info.destroy
     respond_to do |format|
-      format.html { redirect_to shared_infos_url, notice: 'Shared info was successfully destroyed.' }
+      format.html { redirect_to shared_infos_url, notice: '削除されました。' }
       format.json { head :no_content }
     end
   end
