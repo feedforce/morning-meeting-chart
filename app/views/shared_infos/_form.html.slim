@@ -10,19 +10,19 @@
     .row
       .col-xs-4
         .form-group
-          = f.label :title
+          = f.label 'タイトル'
           = f.text_field :title, class: 'form-control'
 
         .form-group
-          = f.label :owner
+          = f.label '発表者(発表チーム)'
           = f.text_field :owner, class: 'form-control'
 
         .form-group
-          = f.label :announce_date
+          = f.label '発表日'
           = f.date_select :announce_date, class: 'form-control'
 
         .form-group
-          = f.label :body
+          = f.label '発表内容 (Markdown形式)'
           = f.text_area :body, class: 'form-control', size: "10x10"
 
         .container
