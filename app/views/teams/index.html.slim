@@ -45,22 +45,23 @@
                   | 目標の新規登録
 
           td.right-align
-            = link_to edit_team_path(team) do
-              button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon
-                | チーム編集
-
-          td.right-align
             = link_to team do
               button.btn.btn-default
                 span.glyphicon.glyphicon-stats.btn-icon
                 | プレビュー
 
-          td.right-align
-            = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' } do
-              button.btn.btn-danger
-                span.glyphicon.glyphicon-trash.btn-icon
-                | チーム削除
+          td.dropdown
+            a.dropdown-toggle href='#' data-toggle='dropdown' aria-expanded='false'
+              span.glyphicon.glyphicon-cog
+            ul.dropdown-menu
+              li
+                = link_to edit_team_path(team) do
+                  span.glyphicon.glyphicon-wrench.btn-icon
+                  | チーム編集
+              li
+                = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+                  span.glyphicon.glyphicon-trash.btn-icon
+                  | 削除
 
 .container
   hr
