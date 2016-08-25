@@ -19,7 +19,7 @@
         - @goals.last.progresses.latest.topics.each do |topic|
           - if topic.content.present?
             li.topics
-              = topic.content
+              = auto_link(topic.content)
 
 .container-preview
   hr
@@ -39,5 +39,12 @@
         - next_team = Team.next_team(@team.order)
         = link_to(team_path(next_team.id)) do
           = next_team.name
+          span aria-hidden="true"
+            | &nbsp;&rarr;
+    - elsif SharedInfo.exists?(['? < announce_date AND announce_date <= ?', Date.today - 7, Date.today])
+      li.next
+        - shared_info = SharedInfo.this_period.order(:id).first
+        = link_to(shared_info_path(shared_info.id)) do
+          = shared_info.title
           span aria-hidden="true"
             | &nbsp;&rarr;

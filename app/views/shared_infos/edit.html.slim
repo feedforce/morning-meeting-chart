@@ -1,0 +1,10 @@
+.container
+  h1 = "#{@shared_info.title} の編集"
+
+.container
+  hr
+
+== render 'form'
+
+.container
+  = link_to '戻る', shared_infos_path, class: 'btn btn-default'

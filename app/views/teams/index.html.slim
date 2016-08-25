@@ -50,7 +50,15 @@
                 | チーム削除
 
 .container
-  = link_to new_team_path do
-    button.btn.btn-primary
-      span.glyphicon.glyphicon-plus.btn-icon
-      | チーム新規作成
+  hr
+
+.container
+  p = link_to new_team_path do
+      button.btn.btn-primary
+        span.glyphicon.glyphicon-plus.btn-icon
+        | チーム新規作成
+
+  p = link_to shared_infos_path do
+      button.btn.btn-info
+        span.glyphicon.glyphicon-th-list.btn-icon
+        | 全体共有事項一覧
