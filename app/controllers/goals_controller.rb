@@ -12,7 +12,7 @@ class GoalsController < ApplicationController
   end
 
   def new
-    @goal = @team.goals.new
+    @goal = @team.goals.new(date: Date.current)
   end
 
   def create
