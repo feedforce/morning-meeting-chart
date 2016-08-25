@@ -16,4 +16,8 @@ class Team < ApplicationRecord
   def self.has_next_team?(order)
     exists?(['"order" > ?', order])
   end
+
+  def current_month_goal?
+    goals.order(:date).last.date.month == Date.current.month if goals
+  end
 end
