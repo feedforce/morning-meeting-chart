@@ -40,6 +40,12 @@
                   | 進捗一覧
 
             td
+              = link_to new_team_goal_progress_path(@team, goal) do
+                button_tag.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 先週の進捗追加
+
+            td
               = link_to edit_team_goal_path(@team, goal), action: :edit do
                 button_tag.btn.btn-success
                   span.glyphicon.glyphicon-wrench.btn-icon
