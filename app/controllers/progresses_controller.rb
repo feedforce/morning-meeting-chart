@@ -27,7 +27,7 @@ class ProgressesController < ApplicationController
         end
       end
     end
-    redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '更新されました'
+    redirect_to team_path(params[:team_id]), notice: '更新されました'
   rescue
     redirect_to edit_team_goal_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
   end
@@ -39,7 +39,7 @@ class ProgressesController < ApplicationController
         @progress.topics.create!(content: val)
       end
     end
-    redirect_to team_goal_progresses_path(team_id: params[:team_id], goal_id: params[:goal_id]), notice: '作成されました'
+    redirect_to team_path(params[:team_id]), notice: '作成されました'
   rescue
     redirect_to new_team_goal_progress_path(team_id: params[:team_id], goal_id: params[:goal_id]),  alert: '入力に不備があります'
   end

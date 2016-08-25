@@ -31,11 +31,18 @@
                 span.glyphicon.glyphicon-th-list.btn-icon
                 | 目標一覧
 
-          td.right-align
-            = link_to edit_team_path(team) do
-              button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon
-                | チーム編集
+          - if team.goals.present? && team.current_month_goal?
+            td.right-align
+              = link_to new_team_goal_progress_path(team, team.goals.order(:date).last)
+                button.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 先週の進捗追加
+          - else
+            td.right-align
+              = link_to new_team_goal_path(team)
+                button.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 今月の目標追加
 
           td.right-align
             = link_to team do
@@ -43,11 +50,18 @@
                 span.glyphicon.glyphicon-stats.btn-icon
                 | プレビュー
 
-          td.right-align
-            = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' } do
-              button.btn.btn-danger
-                span.glyphicon.glyphicon-trash.btn-icon
-                | チーム削除
+          td.dropdown
+            a.dropdown-toggle href='#' data-toggle='dropdown' aria-expanded='false'
+              span.glyphicon.glyphicon-cog
+            ul.dropdown-menu
+              li
+                = link_to edit_team_path(team) do
+                  span.glyphicon.glyphicon-wrench.btn-icon
+                  | チーム編集
+              li
+                = link_to team, method: :delete, data: { confirm: '削除してよろしいですか？' }
+                  span.glyphicon.glyphicon-trash.btn-icon
+                  | 削除
 
 .container
   hr
