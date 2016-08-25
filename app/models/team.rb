@@ -18,6 +18,13 @@ class Team < ApplicationRecord
   end
 
   def current_month_goal?
-    goals.order(:date).last.date.month == Date.current.month if goals
+    goals.order(:date).last.date.month == last_monday.month if goals
+  end
+
+  private
+
+  def last_monday
+    this_day = Date.today
+    (this_day - (this_day.wday - 1)) - 7
   end
 end
