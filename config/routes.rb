@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :shared_infos
   root to: 'teams#index'
   resources :teams do
     resources :goals do

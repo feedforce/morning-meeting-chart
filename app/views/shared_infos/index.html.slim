@@ -1,0 +1,48 @@
+.container
+  h1 全体共有事項一覧
+
+.container
+  hr
+
+.container
+  table.table
+    thead
+      tr
+        th タイトル
+        th 発表者
+        th[colspan="3"]
+
+    tbody
+      - @shared_infos.each do |shared_info|
+        tr
+          td = shared_info.title
+          td = shared_info.owner
+
+          td = link_to edit_shared_info_path(shared_info) do
+            button.btn.btn-success
+              span.glyphicon.glyphicon-wrench.btn-icon
+              | 編集
+
+          td = link_to shared_info do
+            button.btn.btn-default
+              span.glyphicon.glyphicon-ok.btn-icon
+              | 確認
+
+          td = link_to shared_info, data: { confirm: '削除してよろしいですか？' }, method: :delete do
+            button.btn.btn-danger
+              span.glyphicon.glyphicon-trash.btn-icon
+              | 削除
+
+.container
+  hr
+
+.container
+  p = link_to new_shared_info_path do
+      button.btn.btn-primary
+        span.glyphicon.glyphicon-plus.btn-icon
+        | 新規作成
+
+  p = link_to teams_path do
+      button.btn.btn-info
+        span.glyphicon.glyphicon-th-list.btn-icon
+        | チーム一覧

@@ -1,0 +1,42 @@
+.container
+  h1
+    = @shared_info.title
+  h4
+    | by:
+    = " #{@shared_info.owner}"
+
+.container
+  hr
+
+.container
+  .shared-info-body
+    = markdown(@shared_info.body)
+
+.container
+  hr
+
+.container
+  ul.pager
+    - if SharedInfo.has_prev_info?(@shared_info.id)
+      li.previous
+        - prev_info = SharedInfo.this_period.prev_id(@shared_info.id)
+        = link_to(shared_info_path(prev_info.id)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          = prev_info.title
+    - else
+      li.previous
+        - last_team = Team.order(:order).last
+        = link_to(team_path(last_team.id)) do
+          span aria-hidden="true"
+            | &larr;&nbsp;
+          = last_team.name
+
+
+    - if SharedInfo.has_next_info?(@shared_info.id)
+      li.next
+        - next_info = SharedInfo.this_period.next_id(@shared_info.id)
+        = link_to(shared_info_path(next_info.id)) do
+          = next_info.title
+          span aria-hidden="true"
+            | &nbsp;&rarr;

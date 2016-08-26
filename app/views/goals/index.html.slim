@@ -4,46 +4,64 @@
   h3
     = "#{@team.name} チーム "
 
-.container.container-table
-  table.table.table-striped
-    thead
-      tr
-        th.centering
-          | 年
-        th.centering
-          | 月
-        th.centering
-          | 今月の目標
-        th[colspan="4"]
-    tbody
-      - @goals.order(:date).each do |goal|
+=form_tag("/teams/#{@team.id}/goals", method: 'get', enforce_utf8: false, name: nil) do |f|
+  .container.container-table
+    table.table.table-striped
+      thead
         tr
-          td.centering
-            = "#{goal.date.year}"
+          th.centering
+            |
+          th.centering
+            | 年
+          th.centering
+            | 月
+          th.centering
+            | 今月の目標
+          th[colspan="4"]
+      tbody
+        - @goals.each do |goal|
+          tr
+            td.centering
+              = check_box_tag('graph[]', goal.id.to_i) unless goal.progresses.empty?
 
-          td.centering
-            = "#{goal.date.month}"
+            td.centering
+              = "#{goal.date.year}"
 
-          td.centering
-            = goal.goal_formatted
+            td.centering
+              = "#{goal.date.month}"
 
-          td
-            = link_to team_goal_progresses_path(@team, goal) do
-              button.btn.btn-info
-                span.glyphicon.glyphicon-th-list.btn-icon
-                | 進捗一覧
+            td.centering
+              = goal.goal_formatted
 
-          td
-            = link_to edit_team_goal_path(@team, goal), action: :edit do
-              button.btn.btn-success
-                span.glyphicon.glyphicon-wrench.btn-icon
-                | 目標編集
+            td
+              = link_to team_goal_progresses_path(@team, goal) do
+                button_tag.btn.btn-info
+                  span.glyphicon.glyphicon-th-list.btn-icon
+                  | 進捗一覧
 
-          td
-            = link_to team_goal_path(@team, goal), method: :delete, data: { confirm: '削除してよろしいですか？' } do
-              button.btn.btn-danger
-                span.glyphicon.glyphicon-trash.btn-icon
-                | 削除
+            td
+              = link_to new_team_goal_progress_path(@team, goal) do
+                button_tag.btn.btn-primary
+                  span.glyphicon.glyphicon-plus.btn-icon
+                  | 先週の進捗追加
+
+            td
+              = link_to edit_team_goal_path(@team, goal), action: :edit do
+                button_tag.btn.btn-success
+                  span.glyphicon.glyphicon-wrench.btn-icon
+                  | 目標編集
+
+            td
+              = link_to team_goal_path(@team, goal), method: :delete, data: { confirm: '削除してよろしいですか？' } do
+                button_tag.btn.btn-danger
+                  span.glyphicon.glyphicon-trash.btn-icon
+                  | 削除
+  .container
+    .form-group
+      = button_tag type: 'submit', class: 'btn btn-default' do
+        span.glyphicon.glyphicon-stats.btn-icon
+        | グラフ作成
+
 
 .container
   = link_to new_team_goal_path(@team) do
@@ -52,6 +70,11 @@
       | 目標の新規登録
 
 hr
+- if @graph
+  .container.container-graph
+    h3 グラフプレビュー
+    = high_chart("some_id", @graph)
+
 
 .container
   = link_to 'チーム一覧へ', teams_path, class: 'btn btn-default'

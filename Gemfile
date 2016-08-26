@@ -22,6 +22,9 @@ gem 'coffee-rails', '~> 4.2'
 ## Graph
 gem 'lazy_high_charts'
 
+## Qiita API
+gem 'qiita'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -34,6 +37,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Use Slim template engine
 gem 'slim-rails'
+
+# Use rails_autolink to create a tag in views
+gem 'rails_autolink'
+# Use redcarpet to parse markdown text
+gem 'redcarpet'
 
 # Use datetimepicker-rails for pick a date in forms
 gem 'momentjs-rails'
