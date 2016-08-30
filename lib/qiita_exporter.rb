@@ -4,14 +4,17 @@ require 'erb'
 
 class QiitaExporter
   def self.exec
-    @@instance ||= self.new
-    @@instance.client.create_item(@@instance.params)
+    new.create_item
+  end
+
+  def create_item
+    client.create_item(params)
   end
 
   def client
     @client ||= Qiita::Client.new(
       access_token: ENV['QIITA_ACCESS_TOKEN'],
-      team: ENV['QIITA_TEAM_NAME']
+      team: ENV['QIITA_TEAM_NAME'],
     )
   end
 
@@ -50,7 +53,6 @@ class QiitaExporter
   end
 
   def entity(team)
-    return '(件)' if team.orders?
-    return '(円)' if team.sales?
+    team.orders? ? '(件)' : '(円)'
   end
 end
