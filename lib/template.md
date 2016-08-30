@@ -10,8 +10,7 @@
 ### 先週のトピック
 
     <%- topics.each do |topic| -%>
-- <%= topic.content %>
-
+<%= '- ' + topic.content + "\n\n" if topic.content.present? -%>
     <%- end -%>
   <%- end -%>
 <%- end -%>
