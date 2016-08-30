@@ -29,13 +29,13 @@ class QiitaExporter
 
   def tags
     [
-      { name: '全体朝会', versions: [] }
+      { name: '全体朝礼', versions: [] }
     ]
   end
 
   def title
     now = Time.current.in_time_zone('Asia/Tokyo')
-    %(#{now.year}/#{now.month}/#{now.day} 月曜全体朝会まとめ)
+    %(#{now.year}/#{now.month}/#{now.day} 月曜全体朝礼まとめ)
   end
 
   def body
