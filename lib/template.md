@@ -1,4 +1,4 @@
-<%- Team.all.each do |team| -%>
+<%- teams.each do |team| -%>
 ## <%= team.name %>
 
 ### <%= progress(team) %>

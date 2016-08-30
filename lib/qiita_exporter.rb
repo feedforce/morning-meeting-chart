@@ -42,6 +42,10 @@ class QiitaExporter
     ERB.new(File.read('./lib/template.md'), nil, '-').result(binding)
   end
 
+  def teams
+    Team.order(:order)
+  end
+
   def progress(team)
     goal = team.goals.last
     sum = goal.progresses.sum(:amount)
