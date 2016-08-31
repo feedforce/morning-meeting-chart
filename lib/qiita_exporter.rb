@@ -49,7 +49,7 @@ class QiitaExporter
   def progress(team)
     goal = team.goals.last
     sum = goal.progresses.sum(:amount)
-    "今月の達成度 : #{sum}/#{goal.goal} #{entity(team)} (#{((sum.to_f/goal.goal.to_f) * 100).to_i}%)"
+    "今月の達成度 : #{sum}/#{goal.goal} #{entity(team)} (#{((sum.to_f/goal.goal.to_f) * 100).to_i.to_s(:delimited)}%)"
   end
 
   def topics(team)
