@@ -78,6 +78,8 @@ group :development, :test do
 
   gem 'hirb'
   gem 'hirb-unicode'
+
+  gem 'annotate'
 end
 
 group :development do
