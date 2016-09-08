@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  entity     :integer          default("orders")
+#  order      :integer
+#
+
 class Team < ApplicationRecord
   has_many :goals, dependent: :destroy
 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: progresses
+#
+#  id         :integer          not null, primary key
+#  start_date :date
+#  amount     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  end_date   :date
+#  goal_id    :integer
+#
+
 class Progress < ApplicationRecord
   has_many :topics, dependent: :destroy
   belongs_to :goal
