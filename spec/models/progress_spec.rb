@@ -14,8 +14,9 @@
 require 'rails_helper'
 
 RSpec.describe Progress, type: :model do
-  describe 'バリデーション' do
-    it { should validate_presence_of(:start_date) }
-    it { should validate_presence_of(:amount) }
+  describe 'validation' do
+    describe '#start_date' do
+      it { is_expected.to validate_presence_of(:start_date) }
+    end
   end
 end
