@@ -18,5 +18,15 @@ RSpec.describe Team, type: :model do
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_uniqueness_of(:name) }
     end
+
+    describe '#order' do
+      it { is_expected.to validate_presence_of(:order) }
+      it { is_expected.to validate_uniqueness_of(:order) }
+
+      it '1以上であること' do
+        is_expected.to validate_numericality_of(:order)
+                        .only_integer.is_greater_than_or_equal_to(1)
+      end
+    end
   end
 end
