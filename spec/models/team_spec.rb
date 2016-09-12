@@ -13,7 +13,10 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  describe 'バリデーション' do
-    it { should validate_presence_of(:name) }
+  describe 'validation' do
+    describe '#name' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_uniqueness_of(:name) }
+    end
   end
 end
