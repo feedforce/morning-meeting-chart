@@ -13,5 +13,9 @@
 require 'rails_helper'
 
 RSpec.describe Goal, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validation' do
+    describe '#date' do
+      it { is_expected.to validate_presence_of(:date) }
+    end
+  end
 end
