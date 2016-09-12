@@ -28,5 +28,9 @@ RSpec.describe Team, type: :model do
                         .only_integer.is_greater_than_or_equal_to(1)
       end
     end
+
+    describe '#entity' do
+      it { is_expected.to validate_presence_of(:entity) }
+    end
   end
 end

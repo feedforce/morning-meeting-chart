@@ -19,6 +19,7 @@ class Team < ApplicationRecord
               only_integer: true, greater_than_or_equal_to: 1
             }
 
+  validates :entity, presence: true
   enum entity: { orders: 0, sales: 1 }
 
   scope :prev_team, -> (order) { where('"order" < ?', order).order(:order).last }
