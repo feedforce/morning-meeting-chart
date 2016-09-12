@@ -18,5 +18,13 @@ RSpec.describe Progress, type: :model do
     describe '#start_date' do
       it { is_expected.to validate_presence_of(:start_date) }
     end
+
+    describe '#amount' do
+      it { is_expected.to validate_presence_of(:amount) }
+      it '0以上であること' do
+        is_expected.to validate_numericality_of(:amount)
+                        .only_integer.is_greater_than_or_equal_to(0)
+      end
+    end
   end
 end

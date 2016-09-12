@@ -17,6 +17,10 @@ class Progress < ApplicationRecord
 
   validates :start_date, presence: true
   validates :amount, presence: true
+  validates :amount, numericality:
+                       {
+                         only_integer: true, greater_than_or_equal_to: 0
+                       }
 
   scope :latest, -> { order(:start_date).last }
 
