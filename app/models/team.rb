@@ -15,9 +15,10 @@ class Team < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :order, presence: true, uniqueness: true
-  validates :order, numericality: {
-              only_integer: true, greater_than_or_equal_to: 1
-            }
+  validates :order, numericality:
+                      {
+                        only_integer: true, greater_than_or_equal_to: 1
+                      }
 
   validates :entity, presence: true
   enum entity: { orders: 0, sales: 1 }
