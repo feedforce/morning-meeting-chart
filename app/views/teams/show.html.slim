@@ -18,10 +18,9 @@
         | Topics
       - if @goals.present?
         ul.list-group
-        - @goals.last.progresses.latest.topics.each do |topic|
-          - if topic.content.present?
+          - if @goals.last.progresses.latest.topic.content.present?
             li.topics
-              = auto_link(topic.content)
+              = auto_link(@goals.last.progresses.latest.topic.content)
 
 .container-preview
   hr

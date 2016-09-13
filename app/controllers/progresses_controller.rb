@@ -35,9 +35,7 @@ class ProgressesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
-      topic_params.each do |_key, val|
-        @progress.topics.create!(content: val)
-      end
+      Topic.create!(progress_id: @progress.id, content: topic_params[:content])
     end
     redirect_to team_path(params[:team_id]), notice: '作成されました'
   rescue
@@ -76,7 +74,7 @@ class ProgressesController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).require(:content).permit('0', '1', '2')
+    params.require(:topic).permit(:content)
   end
 
   def last_monday
