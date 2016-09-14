@@ -9,7 +9,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 class Goal < ApplicationRecord
   has_many :progresses, dependent: :destroy
   belongs_to :team
