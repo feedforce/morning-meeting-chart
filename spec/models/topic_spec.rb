@@ -12,7 +12,9 @@
 require 'rails_helper'
 
 RSpec.describe Topic, type: :model do
-  describe 'バリデーション' do
-    it { should validate_presence_of(:content) }
+  describe 'validation' do
+    describe '#content' do
+      it { is_expected.to validate_presence_of(:content) }
+    end
   end
 end

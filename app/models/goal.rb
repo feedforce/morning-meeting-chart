@@ -16,6 +16,11 @@ class Goal < ApplicationRecord
 
   validates :date, presence: true
   validates :goal, presence: true
+  validates :goal, numericality:
+                      {
+                        only_integer: true, greater_than_or_equal_to: 1
+                      }
+
 
   def goal_formatted
     if team.orders?

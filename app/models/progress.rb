@@ -16,7 +16,13 @@ class Progress < ApplicationRecord
   belongs_to :goal
 
   validates :start_date, presence: true
+  validates :end_date, presence: true
+  validate :past_start_date?
   validates :amount, presence: true
+  validates :amount, numericality:
+                       {
+                         only_integer: true, greater_than_or_equal_to: 0
+                       }
 
   scope :latest, -> { order(:start_date).last }
 
@@ -39,6 +45,11 @@ class Progress < ApplicationRecord
   end
 
   private
+
+  def past_start_date?
+    return unless start_date && end_date
+    errors.add(:start_date, 'は終了時間よりも前に設定してください。') if start_date > end_date
+  end
 
   def set_default
     self.start_date ||= last_monday

@@ -14,5 +14,17 @@
 require 'rails_helper'
 
 RSpec.describe SharedInfo, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validation' do
+    describe '#title' do
+      it { is_expected.to validate_presence_of(:title) }
+    end
+
+    describe '#body' do
+      it { is_expected.to validate_presence_of(:body) }
+    end
+
+    describe '#announce_date' do
+      it { is_expected.to validate_presence_of(:announce_date) }
+    end
+  end
 end
