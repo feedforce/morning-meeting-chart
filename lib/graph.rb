@@ -118,19 +118,26 @@ module Graph
         },
         max: max,
         allowDecimals: false,
-        plotLines: [
-          {
-            value: @goal,
-            color: '#FF0000',
-            width: 2,
-            label: {
-              text: "目標 = #{@goal.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse}",
-              aligin: 'left',
-              x: 0,
-              y: -10
-            }
-          }
-        ]
+        plotLines: [plot_line_options]
+      }
+    end
+
+    def plot_line_options
+      {
+        value: @goal,
+        color: '#FF0000',
+        width: 2,
+        label: plot_line_label_options
+      }
+    end
+
+    def plot_line_label_options
+      {
+        text: "目標 = " \
+              "#{@goal.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse}",
+        aligin: 'left',
+        x: 0,
+        y: -10
       }
     end
 
