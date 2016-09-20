@@ -56,7 +56,7 @@ module Graph
 
     def multi_series
       @series = []
-      @goals.map(&:progresses).reverse.each do |progresses|
+      @goals.map(&:progresses).reverse_each do |progresses|
         @series << progresses.map(&:amount).inject(:+)
       end
     end
