@@ -25,7 +25,7 @@ module Graph
 
         f.series(line_series_options)
         f.yAxis [y_axis]
-        f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
+        f.legend(legend_options)
         f.chart(height: 500)
       end
     end
@@ -97,6 +97,10 @@ module Graph
         stacking: 'normal',
         data: stacked_data_column(amount, n)
       }
+    end
+
+    def legend_options
+      { align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical' }
     end
 
     def stacked_data_column(amount, n)
