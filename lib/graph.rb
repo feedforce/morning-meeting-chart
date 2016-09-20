@@ -26,14 +26,7 @@ module Graph
             data: stacked_data_column(amount, n)
           )
         end
-        f.series(
-          type: 'line',
-          name: '合計値',
-          data: stacked_data_line,
-          dataLabels: {
-            enabled: true
-          }
-        )
+        f.series(line_series_options)
         f.yAxis [y_axis]
         f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
         f.chart(height: 500)
@@ -87,6 +80,17 @@ module Graph
       @series.reverse.map do |s|
         sum += s
       end
+    end
+
+    def line_series_options
+      {
+        type: 'line',
+        name: '合計値',
+        data: stacked_data_line,
+        dataLabels: {
+          enabled: true
+        }
+      }
     end
 
     def stacked_data_column(amount, n)
