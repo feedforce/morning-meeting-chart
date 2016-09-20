@@ -18,14 +18,11 @@ module Graph
       LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: @title)
         f.xAxis(categories: @categories)
+
         @series.each_with_index do |amount, n|
-          f.series(
-            type: 'column',
-            name: @categories.reverse[n],
-            stacking: 'normal',
-            data: stacked_data_column(amount, n)
-          )
+          f.series(column_series_options(amount, n))
         end
+
         f.series(line_series_options)
         f.yAxis [y_axis]
         f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
@@ -90,6 +87,15 @@ module Graph
         dataLabels: {
           enabled: true
         }
+      }
+    end
+
+    def column_series_options(amount, n)
+      {
+        type: 'column',
+        name: @categories.reverse[n],
+        stacking: 'normal',
+        data: stacked_data_column(amount, n)
       }
     end
 
