@@ -11,6 +11,10 @@ module Graph
         multi_goals(goals)
       end
 
+      create_chart
+    end
+
+    def create_chart
       LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: @title)
         f.xAxis(categories: @categories)
