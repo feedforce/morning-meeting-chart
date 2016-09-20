@@ -42,7 +42,8 @@ module Graph
     def multi_goals(goals)
       @team = goals.first.team
       @goals = goals
-      @title = "#{@team.name} : #{@goals.first.date.strftime("%Y年 %m月")} ~  #{@goals.last.date.strftime("%Y年 %m月")}"
+      @title = "#{@team.name} : #{@goals.first.date.strftime("%Y年 %m月")}" \
+               " ~  #{@goals.last.date.strftime("%Y年 %m月")}"
       @categories = multi_categories
       multi_series
       @goal = @goals.map(&:goal).inject(:+)
@@ -62,7 +63,8 @@ module Graph
 
     def single_categories
       @goals.progresses.map do |progress|
-        "#{progress.start_date.day}〜#{(progress.end_date).day}日"
+        "#{progress.start_date.day} ~ " \
+        "#{progress.end_date.day}日"
       end
     end
 
