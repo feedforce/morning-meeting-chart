@@ -67,7 +67,7 @@ module Graph
     end
 
     def single_categories
-      @goals.progresses.map do |progress|
+      @goals.progresses.order(:start_date).map do |progress|
         "#{progress.start_date.day}〜#{(progress.end_date).day}日"
       end
     end
