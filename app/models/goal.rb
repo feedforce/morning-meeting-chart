@@ -9,7 +9,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 class Goal < ApplicationRecord
   has_many :progresses, dependent: :destroy
   belongs_to :team
@@ -23,20 +22,16 @@ class Goal < ApplicationRecord
 
 
   def goal_formatted
+    ActionController::Base.helpers.number_to_currency(goal, format_options)
+  end
+
+  private
+
+  def format_options
     if team.orders?
-      ActionController::Base.helpers.number_to_currency(
-        goal,
-        format: "%n%u",
-        unit: ' 件',
-        precision: 0
-      )
+      { format: '%n%u', unit: ' 件', precision: 0 }
     else
-      ActionController::Base.helpers.number_to_currency(
-        goal,
-        format: "%n%u",
-        unit: ' 円',
-        precision: 0
-      )
+      { format: '%n%u', unit: ' 円', precision: 0 }
     end
   end
 end

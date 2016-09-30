@@ -11,28 +11,22 @@ module Graph
         multi_goals(goals)
       end
 
+      create_chart
+    end
+
+    def create_chart
       LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: @title)
         f.xAxis(categories: @categories)
+
         @series.each_with_index do |amount, n|
-          f.series(
-            type: 'column',
-            name: @categories.reverse[n],
-            stacking: 'normal',
-            data: stacked_data_column(amount, n)
-          )
+          f.series(column_series_options(amount, n))
         end
-        f.series(
-          type: 'line',
-          name: '合計値',
-          data: stacked_data_line,
-          dataLabels: {
-            enabled: true
-          }
-        )
+
+        f.series(line_series_options)
         f.yAxis [y_axis]
-        f.legend(align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical')
-        f.chart({ height: 500 })
+        f.legend(legend_options)
+        f.chart(height: 500)
       end
     end
 
@@ -48,7 +42,8 @@ module Graph
     def multi_goals(goals)
       @team = goals.first.team
       @goals = goals
-      @title = "#{@team.name} : #{@goals.first.date.strftime("%Y年 %m月")} ~  #{@goals.last.date.strftime("%Y年 %m月")}"
+      @title = "#{@team.name} : #{@goals.first.date.strftime("%Y年 %m月")}" \
+               " ~  #{@goals.last.date.strftime("%Y年 %m月")}"
       @categories = multi_categories
       multi_series
       @goal = @goals.map(&:goal).inject(:+)
@@ -61,14 +56,15 @@ module Graph
 
     def multi_series
       @series = []
-      @goals.map(&:progresses).reverse.each do |progresses|
+      @goals.map(&:progresses).reverse_each do |progresses|
         @series << progresses.map(&:amount).inject(:+)
       end
     end
 
     def single_categories
       @goals.progresses.map do |progress|
-        "#{progress.start_date.day}〜#{(progress.end_date).day}日"
+        "#{progress.start_date.day} ~ " \
+        "#{progress.end_date.day}日"
       end
     end
 
@@ -83,6 +79,30 @@ module Graph
       @series.reverse.map do |s|
         sum += s
       end
+    end
+
+    def line_series_options
+      {
+        type: 'line',
+        name: '合計値',
+        data: stacked_data_line,
+        dataLabels: {
+          enabled: true
+        }
+      }
+    end
+
+    def column_series_options(amount, n)
+      {
+        type: 'column',
+        name: @categories.reverse[n],
+        stacking: 'normal',
+        data: stacked_data_column(amount, n)
+      }
+    end
+
+    def legend_options
+      { align: 'left', verticalAlign: 'middle', y: 75, layout: 'vertical' }
     end
 
     def stacked_data_column(amount, n)
@@ -100,19 +120,26 @@ module Graph
         },
         max: max,
         allowDecimals: false,
-        plotLines: [
-          {
-            value: @goal,
-            color: '#FF0000',
-            width: 2,
-            label: {
-              text: "目標 = #{@goal.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse}",
-              aligin: 'left',
-              x: 0,
-              y: -10
-            }
-          }
-        ]
+        plotLines: [plot_line_options]
+      }
+    end
+
+    def plot_line_options
+      {
+        value: @goal,
+        color: '#FF0000',
+        width: 2,
+        label: plot_line_label_options
+      }
+    end
+
+    def plot_line_label_options
+      {
+        text: "目標 = " \
+              "#{@goal.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\1,').reverse}",
+        aligin: 'left',
+        x: 0,
+        y: -10
       }
     end
 
