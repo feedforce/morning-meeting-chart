@@ -1,6 +1,9 @@
 .container
   h1 進捗どうですか？
 
+.container
+  hr
+
 .container.container-form
   = form_tag("/teams/#{params[:team_id]}/goals/#{params[:goal_id]}/progresses", method: 'post') do
     .row
@@ -25,7 +28,7 @@
       .col-xs-5
         .form-group
           = label_tag 'トピック'
-          = text_field_tag 'topic[content]', nil, class: 'form-control'
+          = text_area_tag 'topic[content]', nil, class: 'form-control'
 
     .row
       .col-xs-5
