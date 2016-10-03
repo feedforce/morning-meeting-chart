@@ -18,7 +18,8 @@
         | Topics
       - if @goals.present?
         - if @goals.last.progresses.latest.topic.content.present?
-          = markdown(@goals.last.progresses.latest.topic.content)
+          .container-topics
+            = markdown(@goals.last.progresses.latest.topic.content)
 
 .container-preview
   hr
