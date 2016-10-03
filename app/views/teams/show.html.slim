@@ -17,9 +17,8 @@
         span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
         | Topics
       - if @goals.present?
-        ul.list-group
-          - if @goals.last.progresses.latest.topic.content.present?
-            = markdown(@goals.last.progresses.latest.topic.content)
+        - if @goals.last.progresses.latest.topic.content.present?
+          = markdown(@goals.last.progresses.latest.topic.content)
 
 .container-preview
   hr
