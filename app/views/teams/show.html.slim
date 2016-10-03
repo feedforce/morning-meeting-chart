@@ -16,10 +16,9 @@
       h2
         span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
         | Topics
-      - if @goal.present?
-        - if @goal.progresses.latest.topic.present?
-          .container-topics
-            = markdown(@goal.progresses.latest.topic.content)
+      - if @topic.present?
+        .container-topics
+          = markdown(@topic.content)
 
 .container-preview
   hr

@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
   def show
     if can_create_graph?
       @goal = @goals.last
+      @topic = @goal.topics.last
       @graph = Graph.create(@goal)
       @sum = @goal.progresses.sum(:amount)
     else
