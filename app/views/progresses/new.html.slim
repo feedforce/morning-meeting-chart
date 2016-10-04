@@ -27,8 +27,8 @@
     .row
       .col-xs-5
         .form-group
-          = label_tag 'トピック'
-          = text_area_tag 'topic[content]', nil, class: 'form-control', size: '20x10'
+          = label_tag 'トピック(Markdown形式)'
+          = text_area_tag 'topic[content]', @topic_template, class: 'form-control', size: '20x10'
 
     .row
       .col-xs-5

@@ -13,9 +13,6 @@
       - if @team.goals.present?
         = high_chart("chart-#{@team.id}", @graph)
     .col-xs-6
-      h2
-        span.glyphicon.glyphicon-ok.title-icon aria-hidden="true"
-        | Topics
       - if @topic.present?
         .container-topics
           = markdown(@topic.content)

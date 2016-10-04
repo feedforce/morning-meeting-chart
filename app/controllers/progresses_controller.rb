@@ -10,6 +10,10 @@ class ProgressesController < ApplicationController
   def new
     @start_date = last_monday
     @end_date = last_monday + 4
+    @topic_template = %|## Topics
+- {ここにトピックを記入}
+- {ここにトピックを記入}
+- {ここにトピックを記入}|
   end
 
   def edit
