@@ -11,7 +11,8 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     if can_create_graph?
-      @goal = @goals.order(:date).last
+      @goal = @goals.last
+      @topic = @goal.topics.last
       @graph = Graph.create(@goal)
       @sum = @goal.progresses.sum(:amount)
     else

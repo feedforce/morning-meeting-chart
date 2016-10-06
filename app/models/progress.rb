@@ -12,7 +12,7 @@
 #
 
 class Progress < ApplicationRecord
-  has_many :topics, dependent: :destroy
+  has_one :topic, dependent: :destroy
   belongs_to :goal
 
   validates :start_date, presence: true

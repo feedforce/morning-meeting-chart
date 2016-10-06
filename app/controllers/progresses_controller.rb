@@ -10,6 +10,15 @@ class ProgressesController < ApplicationController
   def new
     @start_date = last_monday
     @end_date = last_monday + 4
+    @topic_template = %|## Topics
+### {ここにトピックを記入}
++ {ここに内容を記入}
+
+### {ここにトピックを記入}
++ {ここに内容を記入}
+
+### {ここにトピックを記入}
++ {ここに内容を記入}|
   end
 
   def edit
@@ -18,14 +27,7 @@ class ProgressesController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @progress.update(progress_params)
-      topic_params.each_with_index do |param, index|
-        topic = @progress.topics[index]
-        if topic
-          topic.update!(content: param.last)
-        else
-          @progress.topics.create(content: param.last) if param.last
-        end
-      end
+      @progress.topic.update(topic_params)
     end
     redirect_to team_path(params[:team_id]), notice: '更新されました'
   rescue
@@ -35,9 +37,7 @@ class ProgressesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @progress = Progress.create!(progress_params)
-      topic_params.each do |_key, val|
-        @progress.topics.create!(content: val)
-      end
+      Topic.create!(progress_id: @progress.id, content: topic_params[:content])
     end
     redirect_to team_path(params[:team_id]), notice: '作成されました'
   rescue
@@ -76,7 +76,7 @@ class ProgressesController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).require(:content).permit('0', '1', '2')
+    params.require(:topic).permit(:content)
   end
 
   def last_monday

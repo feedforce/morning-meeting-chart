@@ -12,6 +12,7 @@
 
 class Goal < ApplicationRecord
   has_many :progresses, dependent: :destroy
+  has_many :topics, through: :progresses
   belongs_to :team
 
   validates :date, presence: true

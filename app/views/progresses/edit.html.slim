@@ -1,6 +1,5 @@
 .container
-  h1
-    | チーム情報編集
+  h1 進捗状況編集
 
 .container
   hr
@@ -22,30 +21,14 @@
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag '成果'
-            = text_field_tag 'progress[amount]', @progress.amount, class: 'form-control'
+          = label_tag '成果'
+          = text_field_tag 'progress[amount]', @progress.amount, class: 'form-control'
 
     .row
       .col-xs-5
         .form-group
-          .form-group
-            = label_tag 'トピック1'
-            = text_field_tag 'topic[content][0]', @progress.topics[0]&.content, class: 'form-control'
-
-    .row
-      .col-xs-5
-        .form-group
-          .form-group
-            = label_tag 'トピック2'
-            = text_field_tag 'topic[content][1]', @progress.topics[1]&.content, class: 'form-control'
-
-    .row
-      .col-xs-5
-        .form-group
-          .form-group
-            = label_tag 'トピック3'
-            = text_field_tag 'topic[content][2]', @progress.topics[2]&.content, class: 'form-control'
+          = label_tag 'トピック(Markdown形式)'
+          = text_area_tag 'topic[content]', @progress.topic.content, class: 'form-control', size: '20x10'
 
     .row
       .col-xs-5
