@@ -42,6 +42,6 @@ class Team < ApplicationRecord
 
   def last_monday
     this_day = Date.today
-    (this_day - (this_day.wday - 1)) - 7
+    this_day - (this_day.wday - 1)
   end
 end
