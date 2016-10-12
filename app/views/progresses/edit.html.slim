@@ -25,10 +25,10 @@
           = text_field_tag 'progress[amount]', @progress.amount, class: 'form-control'
 
     .row
-      .col-xs-5
+      .col-xs-8
         .form-group
           = label_tag 'トピック(Markdown形式)'
-          = text_area_tag 'topic[content]', @progress.topic.content, class: 'form-control', size: '20x10'
+          = text_area_tag 'topic[content]', @progress.topic.content, class: 'form-control', size: '20x20'
 
     .row
       .col-xs-5
