@@ -19,12 +19,12 @@ class SharedInfo < ApplicationRecord
     where('? < announce_date AND announce_date <= ?', Date.today - 7, Date.today).order(:id)
   end
 
-  scope :prev_id, -> (id) do
-    where('id < ?', id).order(:id).last
+  def previous
+    SharedInfo.where('id < ?', self.id).order(:id).last
   end
 
-  scope :next_id, -> (id) do
-    where('id > ?', id).order(:id).first
+  def next
+    SharedInfo.where('id < ?', self.id).order(:id).first
   end
 
   def self.has_prev_info?(id)

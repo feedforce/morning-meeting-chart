@@ -12,14 +12,14 @@ RSpec.describe TeamsController, type: :controller do
         create(
           :progress,
           goal: goal1,
-          start_date: Date.new(2016, 7, 1)
+          start_date: Date.new(2016, 7, 4)
         )
       end
       let(:progress2) do
         create(
           :progress,
           goal: goal1,
-          start_date: Date.new(2016, 7, 8)
+          start_date: Date.new(2016, 7, 11)
         )
       end
       let!(:topic1) { create(:topic, progress: progress1, content: 'test1') }
@@ -33,6 +33,29 @@ RSpec.describe TeamsController, type: :controller do
       it '1番新しい Progress の Topic を使うこと' do
         subject
         expect(assigns(:topic)).to eq topic2
+      end
+
+      context '前回の朝礼以降に登録された共有情報がある時' do
+        let!(:info) { create(:shared_info, announce_date: date)}
+        let(:date) { Time.new(2016, 7, 11) }
+        it 'その共有情報に登録されたものを返す' do
+          travel_to date do
+            subject
+            expect(assigns(:info)).to eq info
+          end
+        end
+      end
+
+      context '前回の朝礼以降に登録された共有情報がない時' do
+        let!(:info) do
+          create(:shared_info, announce_date: Date.new(2016, 6, 1))
+        end
+        it 'その共有情報を返す' do
+          travel_to Time.new(2016, 7, 11) do
+            subject
+            expect(assigns(:info)).to eq nil
+          end
+        end
       end
     end
 
