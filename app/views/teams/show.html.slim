@@ -38,10 +38,9 @@
           = next_team.name
           span aria-hidden="true"
             | &nbsp;&rarr;
-    - elsif SharedInfo.exists?(['? < announce_date AND announce_date <= ?', Date.today - 7, Date.today])
+    - elsif @info
       li.next
-        - shared_info = SharedInfo.this_period.order(:id).first
-        = link_to(shared_info_path(shared_info.id)) do
-          = shared_info.title
+        = link_to(shared_info_path(@info.id)) do
+          = @info.title
           span aria-hidden="true"
             | &nbsp;&rarr;
