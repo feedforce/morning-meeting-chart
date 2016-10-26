@@ -18,4 +18,8 @@ module HolidayCalendar
   def self.next_start_week_day(date)
     start_week_day(date + 7)
   end
+
+  def self.next_end_week_day(date)
+    end_week_day(date + 7)
+  end
 end
