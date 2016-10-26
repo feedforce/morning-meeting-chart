@@ -9,6 +9,8 @@ RSpec.describe SharedInfosController, type: :controller do
       announce_date: '2016-08-08',
     }
   }
+  describe 'GET #index' do
+    subject { get :index }
 
   let(:invalid_attributes) {
     {
@@ -18,6 +20,10 @@ RSpec.describe SharedInfosController, type: :controller do
       announce_date: nil,
     }
   }
+    # NOTE: 2016年7月1日は、金曜日。4日は月曜日
+    let!(:info1) { create(:shared_info, announce_date: Date.new(2016, 6, 1)) }
+    let!(:info2) { create(:shared_info, announce_date: Date.new(2016, 7, 1)) }
+    let!(:info3) { create(:shared_info, announce_date: Date.new(2016, 7, 4)) }
 
   let(:valid_session) { {} }
 
@@ -69,6 +75,12 @@ RSpec.describe SharedInfosController, type: :controller do
       it "redirects to the created shared_info" do
         post :create, params: {shared_info: valid_attributes}, session: valid_session
         expect(response).to redirect_to(SharedInfo.last)
+    context '今週分の共有情報が存在する時' do
+      it '今週分のみを一覧で返すこと' do
+        travel_to Date.new(2016, 7, 4) do
+          subject
+          expect(assigns(:shared_infos)).to eq [info2, info3]
+        end
       end
     end
 
@@ -122,6 +134,12 @@ RSpec.describe SharedInfosController, type: :controller do
         shared_info = SharedInfo.create! valid_attributes
         put :update, params: {id: shared_info.to_param, shared_info: invalid_attributes}, session: valid_session
         expect(response).to render_template("edit")
+    context '今週分の共有情報が存在しない時' do
+      it '空配列を返すこと' do
+        travel_to Date.new(2017, 1, 1) do
+          subject
+          expect(assigns(:shared_infos)).to eq []
+        end
       end
     end
   end

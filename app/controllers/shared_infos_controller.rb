@@ -4,7 +4,7 @@ class SharedInfosController < ApplicationController
   # GET /shared_infos
   # GET /shared_infos.json
   def index
-    @shared_infos = SharedInfo.all
+    @shared_infos = SharedInfo.this_period
   end
 
   # GET /shared_infos/1
