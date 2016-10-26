@@ -27,12 +27,4 @@ class SharedInfo < ApplicationRecord
   def next
     SharedInfo.this_period.where('id > ?', self.id).order(:id).first
   end
-
-  def self.has_prev_info?(id)
-    exists?(['? < announce_date AND announce_date <= ? AND "id" < ?', Date.today - 7, Date.today, id])
-  end
-
-  def self.has_next_info?(id)
-    exists?(['? < announce_date AND announce_date <= ? AND "id" > ?', Date.today - 7, Date.today, id])
-  end
 end
