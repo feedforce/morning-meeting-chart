@@ -15,6 +15,7 @@ class SharedInfo < ApplicationRecord
   validates :body, presence: true
   validates :announce_date, presence: true
 
+  # TODO: 7日前となっているけど、実際には前回の朝会の日から次の朝会の日までという実装になるはず
   scope :this_period, -> do
     where('? < announce_date AND announce_date <= ?', Date.today - 7, Date.today).order(:id)
   end
