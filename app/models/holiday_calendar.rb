@@ -26,4 +26,8 @@ module HolidayCalendar
   def self.last_start_week_day(date)
     start_week_day(date - 7)
   end
+
+  def self.last_end_week_day(date)
+    end_week_day(date - 7)
+  end
 end

@@ -155,4 +155,35 @@ RSpec.describe HolidayCalendar, type: :lib do
       end
     end
   end
+
+  describe '.last_end_week_day' do
+    subject { HolidayCalendar.last_end_week_day(date) }
+
+    context '金曜日が祝日ではない場合' do
+      # NOTE: 2016年10月28日(金) は平日
+      let(:date) { Date.new(2016, 11, 2) }
+
+      it '先週の金曜日の日付が返る' do
+        expect(subject).to eq Date.new(2016, 10, 28)
+      end
+    end
+
+    context '金曜日が祝日の場合' do
+      # NOTE: 2016年12月23日(金) は祝日
+      let(:date) { Date.new(2016, 12, 28) }
+
+      it '先週の木曜日の日付が返る' do
+        expect(subject).to eq Date.new(2016, 12, 22)
+      end
+    end
+
+    context '金曜日から祝日が続いている場合' do
+      # NOTE: 2017年05月03日(水) ~ 2017年05月05日(金) は祝日
+      let(:date) { Date.new(2017, 5, 11) }
+
+      it '先週の１番最初の平日を返す' do
+        expect(subject).to eq Date.new(2017, 5, 2)
+      end
+    end
+  end
 end
