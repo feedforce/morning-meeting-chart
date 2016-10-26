@@ -10,6 +10,8 @@ class SharedInfosController < ApplicationController
   # GET /shared_infos/1
   # GET /shared_infos/1.json
   def show
+    @previous_info = @shared_info.previous
+    @next_info = @shared_info.next
   end
 
   # GET /shared_infos/new

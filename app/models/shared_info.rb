@@ -21,11 +21,11 @@ class SharedInfo < ApplicationRecord
   end
 
   def previous
-    SharedInfo.where('id < ?', self.id).order(:id).last
+    SharedInfo.this_period.where('id < ?', self.id).order(:id).last
   end
 
   def next
-    SharedInfo.where('id < ?', self.id).order(:id).first
+    SharedInfo.this_period.where('id > ?', self.id).order(:id).first
   end
 
   def self.has_prev_info?(id)
