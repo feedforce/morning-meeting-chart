@@ -48,7 +48,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
 
 gem 'rack-ip_address_restriction'
 gem 'dotenv-rails'
