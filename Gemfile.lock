@@ -282,6 +282,8 @@ DEPENDENCIES
   binding_of_caller
   bootstrap3-datetimepicker-rails
   byebug
+  capistrano
+  capistrano-bundler
   capistrano-rails
   coffee-rails (~> 4.2)
   dotenv-rails

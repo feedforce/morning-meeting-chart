@@ -47,8 +47,6 @@ gem 'redcarpet'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
 
 gem 'rack-ip_address_restriction'
 gem 'dotenv-rails'
@@ -82,6 +80,11 @@ group :development, :test do
   gem 'hirb-unicode'
 
   gem 'annotate'
+  
+  # Use Capistrano for deployment
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
 end
 
 group :development do
