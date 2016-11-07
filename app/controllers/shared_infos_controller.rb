@@ -4,12 +4,14 @@ class SharedInfosController < ApplicationController
   # GET /shared_infos
   # GET /shared_infos.json
   def index
-    @shared_infos = SharedInfo.all
+    @shared_infos = SharedInfo.this_period
   end
 
   # GET /shared_infos/1
   # GET /shared_infos/1.json
   def show
+    @previous_info = @shared_info.previous
+    @next_info = @shared_info.next
   end
 
   # GET /shared_infos/new
@@ -62,13 +64,14 @@ class SharedInfosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shared_info
-      @shared_info = SharedInfo.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def shared_info_params
-      params.require(:shared_info).permit(:title, :owner, :body, :announce_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shared_info
+    @shared_info = SharedInfo.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def shared_info_params
+    params.require(:shared_info).permit(:title, :owner, :body, :announce_date)
+  end
 end

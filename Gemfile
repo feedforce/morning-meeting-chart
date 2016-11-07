@@ -53,6 +53,8 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'rack-ip_address_restriction'
 gem 'dotenv-rails'
 
+gem 'holiday_jp'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

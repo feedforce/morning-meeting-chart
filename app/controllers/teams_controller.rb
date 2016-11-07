@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
       @topic = @goal.topics.last
       @graph = Graph.create(@goal)
       @sum = @goal.progresses.sum(:amount)
+      @info = SharedInfo.this_period.first
     else
       redirect_to teams_path, alert: '目標や進捗を登録してからグラフを作成してください。'
     end
