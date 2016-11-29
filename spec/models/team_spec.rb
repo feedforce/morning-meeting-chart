@@ -33,4 +33,18 @@ RSpec.describe Team, type: :model do
       it { is_expected.to validate_presence_of(:entity) }
     end
   end
+
+  describe '#current_goal' do
+    subject { team.current_goal }
+
+    let(:team) { create(:team, name: 'hogeho', order: 100) }
+    let!(:goal1) { create(:goal, team: team, date: Date.new(2016, 10)) }
+    let!(:goal2) { create(:goal, team: team, date: Date.new(2016, 11)) }
+    let!(:goal3) { create(:goal, team: team, date: Date.new(2016, 9)) }
+
+    it '日付が最新の目標が返ること' do
+      binding.pry
+      expect(subject).to eq goal2
+    end
+  end
 end
