@@ -12,8 +12,7 @@ javascript:
 
 .container-preview
   hr
-
-.container-preview
+  = render partial: 'next_prev_button'
   .row
     .col-xs-6
       - if @team.goals.present?
@@ -22,30 +21,6 @@ javascript:
       - if @topic.present?
         .container-topics
           = markdown(@topic.content)
-
-.container-preview
   hr
 
-.container-preview
-  ul.pager
-    - if Team.has_prev_team?(@team.order)
-      li.previous
-        - prev_team = Team.prev_team(@team.order)
-        = link_to(team_path(prev_team.id)) do
-          span aria-hidden="true"
-            | &larr;&nbsp;
-          = prev_team.name
-
-    - if Team.has_next_team?(@team.order)
-      li.next
-        - next_team = Team.next_team(@team.order)
-        = link_to(team_path(next_team.id)) do
-          = next_team.name
-          span aria-hidden="true"
-            | &nbsp;&rarr;
-    - elsif @info
-      li.next
-        = link_to(shared_info_path(@info.id)) do
-          = @info.title
-          span aria-hidden="true"
-            | &nbsp;&rarr;
+  = render partial: 'next_prev_button'
