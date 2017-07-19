@@ -35,7 +35,11 @@ class Team < ApplicationRecord
   end
 
   def current_month_goal?
-    goals.order(:date).last.date.month == last_monday.month if goals
+    current_goal.date.month == last_monday.month if goals
+  end
+
+  def current_goal
+    goals.order(:date).last
   end
 
   private
