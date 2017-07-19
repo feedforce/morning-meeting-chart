@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813141505) do
+ActiveRecord::Schema.define(version: 20170702115420) do
 
   create_table "goals", force: :cascade do |t|
     t.date     "date"
@@ -42,10 +42,11 @@ ActiveRecord::Schema.define(version: 20160813141505) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "entity",     default: 0
     t.integer  "order"
+    t.boolean  "disabled",   default: false, null: false
   end
 
   create_table "topics", force: :cascade do |t|

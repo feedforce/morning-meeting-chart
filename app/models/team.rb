@@ -23,15 +23,22 @@ class Team < ApplicationRecord
   validates :entity, presence: true
   enum entity: { orders: 0, sales: 1 }
 
-  scope :prev_team, -> (order) { where('"order" < ?', order).order(:order).last }
-  scope :next_team, -> (order) { where('"order" > ?', order).order(:order).first }
+  scope :enabled, -> () { where(disabled: false) }
+
+  def self.prev_team(order)
+    enabled.where('"order" < ?', order).order(:order).last
+  end
+
+  def self.next_team(order)
+    enabled.where('"order" > ?', order).order(:order).first
+  end
 
   def self.has_prev_team?(order)
-    exists?(['"order" < ?', order])
+    prev_team(order).present?
   end
 
   def self.has_next_team?(order)
-    exists?(['"order" > ?', order])
+    next_team(order).present?
   end
 
   def current_month_goal?
